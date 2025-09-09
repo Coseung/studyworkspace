@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="insertExcuse">
+		INSERT INTO EXCUSE 
+		VALUES(
+			SEQ_EXCUSE.NEXTVAL, 
+			?,
+			?
+		)
+	</entry>
+	<entry key="selectBycategory">
+		SELECT * FROM EXCUSE WHERE CATEGORY= ? ORDER BY EXCUSE_ID ASC
+	</entry>
+	
+	<entry key="selectAll">
+		SELECT * FROM EXCUSE ORDER BY EXCUSE_ID ASC
+	</entry>
+	
+	<entry key="updateExcuse">
+		UPDATE EXCUSE 
+		SET CONTENT=? 
+		WHERE EXCUSE_ID=?
+	</entry>
+	<entry key="deleteEXCUSE">
+		DELETE FROM EXCUSE 
+		WHERE EXCUSE_ID=?
+	</entry>
+	<entry key="memberSearchByName">
+		SELECT * 
+		FROM EXCUSE 
+		WHERE USER_NAME LIKE '%' || ? || '%'
+	</entry>
+	<entry key="insertUser">
+		INSERT INTO USERS(user_id, password, name, role)
+		VALUES(?, ?, ?, ?)
+	</entry>
+	<entry key="selectUserByIdAndPassword">
+		SELECT user_id, password, name, role
+		FROM USERS
+		WHERE user_id = ? AND password = ?
+	</entry>
+	<entry key="insertAttendanceLog">
+		INSERT INTO ATTENDANCE_LOG(log_id, user_id, category, reason, log_date)
+		VALUES(SEQ_ATTENDANCE_LOG.NEXTVAL, ?, ?, ?, DEFAULT)
+	</entry>
+	<entry key="selectAttendanceAllWithUser">
+		SELECT u.user_id, u.name, l.category, l.reason, l.log_date
+		FROM ATTENDANCE_LOG l
+		JOIN USERS u ON u.user_id = l.user_id
+		ORDER BY l.log_date DESC
+	</entry>
+	<entry key="selectTodayLateOrAbsent">
+		SELECT u.user_id, u.name, l.category, l.reason, l.log_date
+		FROM ATTENDANCE_LOG l
+		JOIN USERS u ON u.user_id = l.user_id
+		WHERE l.category IN ('지각','결석')
+		AND TRUNC(l.log_date) = TRUNC(SYSDATE)
+		ORDER BY l.log_date DESC
+	</entry>
+	<entry key="selectTardyCountByUser">
+		SELECT u.user_id, u.name, COUNT(*) AS tardy_count
+		FROM ATTENDANCE_LOG l
+		JOIN USERS u ON u.user_id = l.user_id
+		WHERE l.category = '지각'
+		GROUP BY u.user_id, u.name
+		ORDER BY tardy_count DESC
+	</entry>
+</properties>
