@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습문제1</title>
+    
+</head>
+<body>
+    <form action="order.kh" method="post">
+        <p>고객명 :
+            <input type="text" name ="customer" >
+        </p>
+        <p>전화번호
+            <input type="text" name = "phone">
+
+        </p>
+        <p>E-mail :
+            <input type="text" name = "Email">
+
+        </p>
+         
+        <fieldset>
+            <legend>피자 사이즈</legend>
+            <label><input type="radio" name ="size" value="Small">Small</label></br></br>
+            <label><input type="radio" name ="size" value="Medium">Medium</label></br></br>
+            <label><input type="radio" name ="size" value="Large">Large</label></br>
+        </fieldset>
+    
+        <fieldset>
+            <legend>토핑 선택</legend>
+            <label><input type="checkbox" name="topping" value="베이컨" > 베이컨</label><br>
+            <label><input type="checkbox" name="topping" value="치즈" > 치즈</label><br>
+            <label><input type="checkbox" name="topping" value="양파" > 양파</label><br>
+            <label><input type="checkbox" name="topping" value="버섯"> 버섯</label>
+        </fieldset>
+        <br>
+        <label for="">희망 배송 시간 : <input type="time" name ="time"></label>
+        <br>
+        <label for="">요청사항 : <input type="text" name="plz"></label>
+        <br><br><br>
+        <button type="submit" name="submit">주문하기</button>
+    </form>
+</body>
+</html>
+
