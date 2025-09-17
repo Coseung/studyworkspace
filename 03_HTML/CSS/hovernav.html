@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            justify-items: center;
+        }
+        ul{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+        }
+        li{
+            list-style: none;
+            position:relative;
+
+        }
+        li::after{
+            content: "";
+            position: absolute;
+            top: 30px;
+            background-color: #FF968A;
+            width: 0;
+            height: 2px;
+            left: 0;
+            transition:  0.4s;
+        }
+        li:hover::after{
+            width: 100%;
+        }
+        li:hover{
+            color: gray;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li>홈</li>
+        <li>메뉴</li>
+        <li>서비스</li>
+        <li>About</li>
+    </ul>
+    
+</body>
+</html>

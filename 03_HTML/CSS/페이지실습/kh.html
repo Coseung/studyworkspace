@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습페이지</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+            border:  1px solid black;
+            height: 800px;
+            flex-direction: column;
+        }
+        .search-area{
+            width: 100%;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            border: 1px solid black;
+        }
+        .imgdiv{
+            
+            
+            border: 1px solid black;
+        }
+
+        .search-area > form{
+            
+            width: 80%;
+            min-width: 300px;
+            max-width: 600px;
+            display: flex;
+            height: 32px;
+            
+        }
+
+        .search-area > form input[type=text]{
+            flex: 1;
+            border-radius: 15px 0 0 15px;
+            border: 1px solid gainsboro;
+            border-right: none;
+            padding: 0 12px;
+        }
+
+        .search-area > form input[type=submit]{
+            width: 80px;
+            border-radius: 0 15px 15px 0;
+            border: 1px solid gainsboro;
+            background: #007dc2;
+            color: white;
+            font-weight: 500;
+            border-left: none;
+            cursor: pointer;
+        }
+        .navigator{
+            flex: 1;
+            width: 100%;
+            border: 1px solid black;
+        }
+        .ad_login{
+            flex: 1;
+            width: 100%;
+            border: 1px solid black;
+        }
+        .main-area{
+            width: 100%;
+            flex :3;
+            border: 1px solid black;
+        }
+        .footer{
+            flex: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class = "search-area">
+            <div class="imgdiv">
+                <img src="./images/logo.PNG" alt="">
+
+            </div>
+            <form action="">
+                <input type="text">
+                <input type="submit" value="검색">
+        </form>
+
+        </div>
+        <div class="navigator">
+
+        </div>
+        <div class="ad_login">
+            <div class="ad">
+
+            </div>
+            <div class="login">
+
+            </div>
+        </div>
+        <div class="main-area">
+            <div class="notification">
+
+            </div>
+            <div class="news">
+
+            </div>
+            <div class="ad_image">
+
+            </div>
+        </div>
+        <div class="footer">
+
+        </div>
+    </div>
+</body>
+</html>

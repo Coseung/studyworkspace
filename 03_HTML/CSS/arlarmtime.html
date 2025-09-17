@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+        }
+
+        div h1,h3{
+            animation: moveUp 2s ease-in-out;
+        }
+
+        @keyframes moveUp {
+            0%   { transform: translateY(100px); opacity: 0;}
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes shake {
+            0% { transform: rotate(0deg);}
+            10% { transform: rotate(5deg);}
+            30%{ transform: rotate(-5deg);}
+            50%{ transform: rotate(2deg);}
+            70%{ transform: rotate(-2deg);}
+            100%{transform: rotate(0);}
+        }
+        .second {
+            animation: moveUp 2s ease-in-out;
+            animation-delay: 1s;
+            animation-fill-mode: backwards;
+        }
+        img{
+            
+            animation: shake 1s ease-in-out;
+            animation-delay: 0.5s;
+        }
+
+    </style>
+</head>
+<body>
+    <div style="display: flex; flex-direction: column; position: relative;">
+        <h3 style="color: #55CBCD;">또...</h3>
+        <h1>둥근해가 <br>또 떴습니다</h1>
+    </div>  
+    <div>
+        <img src="./pre sunrise alarms-portrait.png" alt="" style="width: 300px;margin-top: 100px;">
+    </div>
+    <div style="display: flex; flex-direction: column;">
+        <div style="flex: 0 0 50%;">
+
+        </div>
+        <h1 class="second" style="margin: 10px;">일어나세요.</h1>
+    </div>
+</body>
+</html>
