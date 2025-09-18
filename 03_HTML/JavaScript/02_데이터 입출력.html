@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>자바스크립트에서 데이터 입/출력</h1>
+
+    <!--
+        window/document
+        -웹 브라우저에서 자바스크립트를 실행할 때 기본으로 제공되는 전역 객체를 이해해야한다.
+        widow : 브라우저 창이 열릴때마다 생성되는 전역 객체(Global Object), 브라우저 환경에서 모든 전역변수, 함수, 타이머 등등은 window에 소속됨.
+                최상위 객체이므로 window.생략가능 -> window 내부에 선언된 메서드나 변수는 window.생략 하고 가져올 수 있음
+        document : window.dovument객체를 말함 현재 열려있는 HTML문서(DOM)을 표현하는객체 
+        DOMAPI를 통해 탐색 / 수정/ 추가 가능
+    -->
+    <h2>1. 데이터를 출력하는 구문</h2>
+    
+    <p>
+        1)[window.] alert() <br>
+        2)console.log() <br>
+        3)document.write() <br>
+        4)선택한 요소. innerHtml = " html 코드" 
+
+    </p>
+    <script>
+        console.log("콘솔에 출력");
+
+    </script>
+
+    <button onclick=""> body영역에 출력  </button>
+
+    <script>
+        function document(){
+            let str = `<table>
+
+                /<table>`
+        }
+    </script>
+
+    <br><br>
+    <h3>선택한요소  </h3>
+    <div id ="area1">
+         
+    </div>
+</body>
+</html>

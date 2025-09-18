@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .area{
+            border: 1px solid black;
+            width: 300px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML 요소에 접근하기 해당요소 객체 가져오기
+    </h1>
+
+    <h3>1)아이디를 이용해서 요소를 가져오기
+    </h3>
+    <div class="area" id="area1">area1영역</div>
+    <button onclick="accessId()">아이디로 접근</button>
+
+    <script>
+        
+
+        function accessId(){
+          let area1 =document.getElementById('area1');
+
+          area1.className = "t1 t2 t3";
+          area1.style.background ="yellow";
+          area1.style.width= "200px";
+          area1.style.height = "200px"
+
+          area1.innerText = "클릭된 상태";
+
+        }
+    </script>
+
+    <h3> 2)태그명으로 요소 가져오기 </h3>
+
+    <ul>
+        <li>안녕하세요.</li>
+        <li><h2>안녕하세요.</h2></li>
+        <li>안녕하세요.</li>
+    </ul>
+
+    <button onclick="accessTagName()"> 태그명으로 검색</button>
+
+    <script>
+        function accessTagName(){
+            let elList = document.getElementsByTagName("li");
+            for (let i =0; i<elList.length; i++){
+                elList[i].style.color='blue';
+            }
+        }
+        
+    </script>
+</body>
+</html>

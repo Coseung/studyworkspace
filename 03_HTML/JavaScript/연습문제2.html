@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" name="inputfirst" id="inputfirst">
+        <select name="" id="sign">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="/">/</option>
+            <option value="x">x</option>
+            <input type="text" name="inputsecond" id="inputsecond">
+            <button class="resultbutton">=</button>
+            <input type="text" id ="result" >
+
+        </select>
+        
+        
+    </div>
+
+    <script>
+        
+        
+        document.querySelector('.resultbutton').addEventListener('click', function(){
+            const first = document.querySelector('#inputfirst')
+            const second = document.querySelector('#inputsecond')
+            const sign =document.querySelector('#sign')
+            const result =document.querySelector('#result')
+            var signval = sign.value
+           
+            if(first.value != "" && second.value !=""){
+                console.log(parseInt(first.value) + parseInt(second.value), signval)
+
+                switch(signval){
+                    case '+': result.value = parseInt(first.value) + parseInt(second.value); break;
+                        case '-': result.value = parseInt(first.value) - parseInt(second.value); break;
+                            case 'x': result.value = parseInt(first.value) * parseInt(second.value); break;
+                                case '/': if(second.value <=0){
+                                            result.style.background ="red";
+                                            result.style.color="white" ;
+                                            result.value ="입력 오류";
+                                            break;
+                                        }else{ 
+                                            result.value = parseFloat(first.value) / parseFloat(second.value);break;
+                                        }
+                }
+            }else{
+                 alert("숫자를 넣어주세요");
+            }
+        })
+
+
+    </script>
+    
+</body>
+</html>
