@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice4</title>
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .box {
+            width: 400px;
+        }
+
+        fieldset {
+            border: 1px solid #aaa;
+            padding: 10px;
+        }
+
+        legend {
+            font-weight: bold;
+            padding: 0 5px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 95%;
+            padding: 5px;
+            margin-top: 3px;
+        }
+
+        textarea {
+            height: 80px;
+        }
+
+        .btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+        }
+
+        .output {
+            margin-top: 10px;
+            width: 95%;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+     <script>
+        function outputf() {
+        
+        let customer = $('#customer').val();
+        let product = $('#product').val();
+        let price = $('#price').val();
+        let productnum = $('#productnum').val();
+        let productlevel = $('#productlevel').val();
+        let productcontent = $('#productcontent').val();
+
+        let str = 
+            "구매자: " + customer + "\n" +
+            "상품: " + product + "\n" +
+            "가격: " + price + "\n" +
+            "구매 수량: " + productnum + "\n" +
+            "납품 등급: " + productlevel + " 등급\n" +
+            "기타 사항: " + productcontent;
+
+        $('.output').val(str);
+}
+    </script>
+    
+    <div class="box">
+        <fieldset>
+            <legend>구매 정보</legend>
+
+            <label>구매자 :
+                <input type="text" placeholder="구매자 이름을 입력하세요" id="customer">
+            </label>
+
+            <label>상품 :
+                <input type="text" id="product" placeholder="구매 상품명을 입력하세요">
+            </label>
+
+            <label>가격 :
+                <input type="number" id ="price" placeholder="구매 가격을 입력하세요">
+            </label>
+
+            <label>구매 수량 :
+                <input type="number" id ="productnum" min="0" max="100" step="10" placeholder="최소 10">
+                <p class="productnumP" style="font-size: 12px; color: green;"></p>
+            </label>
+
+            <label>납품 등급 :
+                <input type="range" id="productlevel" min="1" max="9" step="2" placeholder="">
+                <p class="productlevelP" style="font-size: 12px;"></p>
+            </label>
+
+            <label>기타 사항 :
+                <textarea id="productcontent" placeholder=""></textarea>
+            </label>
+        </fieldset>
+
+        <button class="btn" onclick="outputf()">입력 값 출력하기</button>
+        <textarea class="output" readonly></textarea>
+    </div>
+
+    <script>
+        $(function(){
+            var $productnum =$('#productnum'); 
+            var $productlevet =$('#productlevel')
+            $productnum.change(function(e){
+                if($productnum.val() >= 10 && $productnum.val()<=100){
+                    $('.productnumP').text("가능합니다.").css({color: 'green', transition :'0.5s'})
+                }else{
+                    $('.productnumP').text("10~100사이로 입력해주세요 ").css({color: 'red',transition :'0.5s'})
+                }
+            })
+
+            $productlevet.change(function(e){
+                $('.productlevelP').text($productlevet.val() +" 등급")
+            })
+
+            function outputf(){
+                let str ="";
+                
+                $('.box').find('input, textarea').each(function(idx, el){
+                    if(el.val()){
+                        str+= (el.val)
+                    }
+                })
+                $('.output').text(str)
+            }
+
+            // let str = "";
+            // const $checkBoxList = $("input[name=hobby]");
+            // $checkBoxList.each(function(idx, el){
+            //     if(el.checked){
+            //         str += (el.value + " ");
+            //     }
+            // });
+
+            // $('#select-result').text(str);
+        })
+
+
+
+    </script>
+</body>
+</html>

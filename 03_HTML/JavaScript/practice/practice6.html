@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice5 검색</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .info-box {
+            border: 1px solid #aaa;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .practice {
+            margin-bottom: 30px;
+        }
+
+        .search-field {
+            margin-top: 10px;
+            display: none; 
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            width: 200px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    
+
+    <div class="practice">
+        <h3>Practice5</h3>
+        <p>검색할 항목을 선택하세요.</p>
+        <label><input type="radio" name="searchType" value="title"> 제목</label>
+        <label><input type="radio" name="searchType" value="date"> 날짜</label>
+        <label><input type="radio" name="searchType" value="author"> 작성자</label>
+
+        
+        <div id="titleField" class="search-field">
+            <input type="text" placeholder="검색할 제목을 입력하세요">
+            <button>검색</button>
+        </div>
+
+        <div id="dateField" class="search-field">
+            <input type="date">
+            <button>검색</button>
+        </div>
+
+        <div id="authorField" class="search-field">
+            <input type="text" placeholder="검색할 작성자 아이디를 입력하세요">
+            <button>검색</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            $('input[name="searchType"]').change(function(){
+                
+                $('.search-field').hide();
+
+                
+                var selected = $(this).val();
+
+                
+                if(selected === 'title') {
+                    $('#titleField').show();
+                } else if(selected === 'date') {
+                    $('#dateField').show();
+                } else if(selected === 'author') {
+                    $('#authorField').show();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
