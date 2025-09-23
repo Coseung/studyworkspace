@@ -1,0 +1,151 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-optical-sizing:  auto;
+    background: linear-gradient(90deg,#222831, #393E46);
+
+}
+
+.container{
+    max-width: 600px;
+    margin: 0 auto;
+    background: #EEEEEE;
+    border-radius:  15px;
+    /* padding: 10px; */
+    box-shadow:  0 5px 30px rgb(17, 17, 17);
+}
+header{
+    font-family: "Do Hyeon", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    padding: 30px 0;
+    border-bottom: 2px solid #dddddd;
+
+    
+}
+header h1{
+    display: flex;
+    justify-content: center;
+    
+
+
+}
+.todo-input{
+    display: flex;
+    padding: 20px;
+}
+.todo-input input{
+    font-family: "Jua", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid white;
+    font-size: 16px;
+    outline:  none;
+    transition: 0.3s ease;
+}
+
+.todo-input input:focus{
+    border-color: #393E46;
+    padding: 0px 25px;
+}
+
+.todo-input button{
+    margin-left: 5px;
+    padding: 15px 25px;
+    background-color: #00ADB5;
+    border-radius: 8px;
+    border: none;
+    color: #EEEEEE;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.todo-input button:hover{
+    opacity: 0.6;
+}
+
+.todo-list{
+    list-style: none;
+    max-height: 400px;
+    overflow-y: auto;
+}
+.todo-item{
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 2px solid #dddddd;
+    transition: 0.1s ease;
+    gap:5px;
+}
+
+.todo-item:hover{
+    transform: translateY(0.3px);
+    background-color: #dddddd;
+}
+.todo-item input[type="checkbox"] {
+    appearance: none; /* 기본(네이티브) 모양을 제거 */
+    box-sizing: border-box;
+    background-clip: content-box;
+    padding: 0.20em;
+    width: 1.2em;
+    height: 1.2em;
+    border: 1px solid gray;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: 0.1s ease-in-out;
+    margin-right: 15px;
+}
+.todo-item >span{
+    flex:  1;
+    font-size: 16px;
+    line-height: 24px;
+}
+.todo-item input[type="checkbox"]:checked {
+    border-color: #00ADB5;
+    background-color: #00ADB5;
+    transition: 0.1s ease-in-out;
+
+}
+
+.delete-btn{
+    border: none;
+    background: #00ADB5;
+    color: white;
+    padding: 6px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.2s ease;
+
+}
+
+.delete-btn:hover{
+    opacity: 0.7;
+}
+.todo-footer{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #dddddd;
+    color: #393E46;
+    border-radius: 0 0 15px 15px;
+    align-items: center;
+
+}
+.todo-footer span{
+    flex :1;
+}

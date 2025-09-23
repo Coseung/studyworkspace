@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <!-- google font -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <div class="container">
+        <!-- 헤더영역 -->
+        <header class="header">
+            <h1> Todo List </h1>
+        </header>
+
+        <div class="todo-input">
+            <input type="text" placeholder="새로운 할일을 입력하세요" id="todo-input">
+            <button id="todo-add-btn">추가</button>
+        </div>
+        <ul class="todo-list">
+            <li class=" todo-item">
+                <input type="checkbox" name="checkbox-test" > <!--체크되지 않은 체크박스 -->
+                <span> 블로그 회고록 </span>
+                <button class="delete-btn"> 삭제 </button>
+            </li>
+            <li class=" todo-item">
+                <input type="checkbox" name="checkbox-test" class="todo-checkbox"> <!--체크되지 않은 체크박스 -->
+                <span> 블로그 회고록 </span>
+                <button class="delete-btn"> 삭제 </button>
+            </li>
+        </ul>
+        <div class="todo-footer">
+            <span>0개 남음 </span>
+            <button class="delete-btn">완료 항목 삭제</button>
+        </div>
+        
+        <script src="./script.js"></script>
+    </div>
+</body>
+</html>
