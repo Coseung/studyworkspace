@@ -147,5 +147,11 @@ header h1{
 
 }
 .todo-footer span{
+
     flex :1;
+}
+
+.chck{
+    text-decoration: line-through;
+    opacity: 0.;
 }

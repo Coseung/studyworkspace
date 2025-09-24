@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List App</title>
+
+    <!-- 외부라이브러리 -->
+    <!-- google web font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+
+    <!-- 내부import -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더영역 -->
+         <header>   
+            <h1>가계부</h1><br>
+            <span>현재 잔액</span><br>
+            <p id="balance">100,000원</p>
+         </header>
+
+         <div class="todo-input">
+            <div style="display: flex;">
+            <input id="todo-input" type="text" placeholder="내용을 입력하세요(예 점심값, 월급)">
+            <input id="todo-input2" type="number" placeholder="금액을 입력하세요">
+            </div>
+            <div class="input-buttons">
+                <button data-filter="income" class="income" >수입</button>
+                <button data-filter="expend" class="expend">지출</button>
+            </div>
+            <button id="todo-add-btn">추가하기</button>
+         </div>
+
+         <div class="filter-buttons">
+            <button data-filter="all" class="active">전체</button>
+            <button data-filter="incomes">수입</button>
+            <button data-filter="expends">지출</button>
+         </div>
+
+         <div class="balance">
+            <div>
+                <h4 >총수입</h4><br>
+                <p id="greencol">원</p>
+            </div>
+            <div>
+                <h4 >총지출</h4><br>
+                <p id="redcol">원</p>
+            </div>
+            <div>
+                <h4 >잔액</h4><br>
+                <p id="balance" >원</p>
+            </div>    
+         </div>
+         <ul id="todo-list" class="todo-list">
+            
+         </ul>
+
+         <div class="todo-footer">
+            
+         </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
