@@ -49,7 +49,7 @@ header span{
 header p{
     color: #08CB00;
 }
-.todo-input{
+.bill-input{
     flex-direction: column;
     display: flex;
     padding: 20px;
@@ -57,7 +57,7 @@ header p{
     border-bottom: 1px solid #dddddd;
 }
 
-.todo-input input{
+.bill-input input{
     font-family: "Jua", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -70,11 +70,11 @@ header p{
     transition: border-color 0.3s ease;
 }
 
-.todo-input input:focus{
+.bill-input input:focus{
     border-color: #00ADB5;
 }
 
-.todo-input button{
+.bill-input button{
     
     padding: 15px 25px;
     background: #00ADB5;
@@ -86,17 +86,17 @@ header p{
     transition: transform 0.3s ease;
 }
 
-.todo-input button:hover{
+.bill-input button:hover{
     transform: translateY(-2px);
 }
 
-.todo-list{
+.bill-list{
     list-style: none;
     max-height: 400px;
     overflow-y: auto;
 }
 
-.todo-item{
+.bill-item{
     display: flex;
     
     align-items: center;
@@ -106,35 +106,35 @@ header p{
     border-radius: 0 0 15px 15px;
 }
 
-.todo-item:hover{
+.bill-item:hover{
     background: rgb(255, 255, 255);
 }
 
-.todo-item.completed{
+.bill-item.completed{
     opacity: 0.6;
 }
 
-.todo-item.completed > span{
+.bill-item.completed > span{
     text-decoration: line-through;
     color: #00ADB5;
     
 }
 
-.todo-item > span{
+.bill-item > span{
     flex: 1;
     font-size: 16px;
     line-height: 24px;
 }
 
-.todo-item .amount {
+.bill-item .amount {
   margin-left: auto;
   text-align: right;
   margin-right: 15px;
 }
-.todo-item .income{
+.bill-item .income{
     color: #08CB00;
 }
-.todo-item .expend{
+.bill-item .expend{
     color: #D92C54;
 }
 .item-name{
@@ -156,7 +156,7 @@ header p{
     background: #d44d4d;
 }
 
-/* .todo-checkbox{
+/* .bill-checkbox{
     width: 20px;
     height: 20px;
     border: 2px solid #dddddd;
@@ -171,20 +171,20 @@ header p{
     transition: all 0.3s ease;
 }
 
-.todo-checkbox.checked{
+.bill-checkbox.checked{
     background: #00ADB5;
     border-color: #00ADB5;
 }
 
-/* .todo-checkbox.checked::after .todo-checkbox.checked요소에 가상의 요소를 추가하겠다.->  */
-.todo-checkbox.checked::after{
+/* .bill-checkbox.checked::after .bill-checkbox.checked요소에 가상의 요소를 추가하겠다.->  */
+.bill-checkbox.checked::after{
     content: '✔';
     color: white;
     font-size: 12px;
     font-weight: bold;
 } */
 
-.todo-footer{
+.bill-footer{
     height: 100px;
     width: 100%;
     display: flex;

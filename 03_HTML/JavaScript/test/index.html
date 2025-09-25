@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List App</title>
+    <title>bill List App</title>
 
     <!-- 외부라이브러리 -->
     <!-- google web font -->
@@ -21,19 +21,19 @@
          <header>   
             <h1>가계부</h1><br>
             <span>현재 잔액</span><br>
-            <p id="balance">100,000원</p>
+            <p class="bal">100,000원</p>
          </header>
 
-         <div class="todo-input">
+         <div class="bill-input">
             <div style="display: flex;">
-            <input id="todo-input" type="text" placeholder="내용을 입력하세요(예 점심값, 월급)">
-            <input id="todo-input2" type="number" placeholder="금액을 입력하세요">
+            <input id="bill-input" type="text" placeholder="내용을 입력하세요(예 점심값, 월급)">
+            <input id="bill-input-amount" type="number" placeholder="금액을 입력하세요">
             </div>
             <div class="input-buttons">
                 <button data-filter="income" class="income" >수입</button>
                 <button data-filter="expend" class="expend">지출</button>
             </div>
-            <button id="todo-add-btn">추가하기</button>
+            <button id="bill-add-btn">추가하기</button>
          </div>
 
          <div class="filter-buttons">
@@ -53,14 +53,14 @@
             </div>
             <div>
                 <h4 >잔액</h4><br>
-                <p id="balance" >원</p>
+                <p class="bal" >원</p>
             </div>    
          </div>
-         <ul id="todo-list" class="todo-list">
+         <ul id="bill-list" class="bill-list">
             
          </ul>
 
-         <div class="todo-footer">
+         <div class="bill-footer">
             
          </div>
     </div>

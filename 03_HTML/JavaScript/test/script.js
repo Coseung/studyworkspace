@@ -6,15 +6,17 @@ let typeState ='';
 
 
 // ====== DOM 요소 ========
-const todoList = document.getElementById('todo-list'); //내역목록 ul
-const clearCompletedBtn = document.getElementById('clear-completed-btn'); //완료목록삭제버튼
-const todoInput = document.getElementById('todo-input'); //todo입력창
-const filterBtns = document.querySelectorAll('.filter-buttons button'); //필터 버튼 목록
-const inputBtns = document.querySelectorAll('.input-buttons button')
-const todoInput2 = document.getElementById('todo-input2')
+const billList = document.getElementById('bill-list'); 
+// const clearCompletedBtn = document.getElementById('clear-completed-btn'); //
+const billInput = document.getElementById('bill-input'); // 내용입력 칸 
+const filterBtns = document.querySelectorAll('.filter-buttons button'); //전치, 수입, 지출
+const inputBtns = document.querySelectorAll('.input-buttons button');//수입 지출 버튼(입력시에)
+const billInputamount = document.getElementById('bill-input-amount'); // 금액 입력칸
+const incomeshtml =document.getElementById('greencol');// 수입
+const expendshtml =document.getElementById('redcol'); // 지출
+const balancesId =document.querySelectorAll('.bal'); // 잔액
+
 // ===== 초기화 함수 ========
-//웹이 시작될 때 실행되는 기본함수
-//이벤트 등록과 화면 렌더링을 담당
 function init() {
     bindEvents();
     render();
@@ -22,32 +24,27 @@ function init() {
 }
 
 function bindEvents() {
-    const addBtn = document.getElementById('todo-add-btn');
+    const addBtn = document.getElementById('bill-add-btn');
     
     addBtn.addEventListener('click', function() {
-            addTodo();
-        
+            addbill();
     });
     
 
-    todoInput.addEventListener('keydown', function(e){
+    billInput.addEventListener('keydown', function(e){
         if(e.key === 'Enter'){
-            addTodo();
+            addbill();
             
         }
     })
-    todoInput2.addEventListener('keydown', function(e){
+    billInputamount.addEventListener('keydown', function(e){
         if(e.key === 'Enter'){
-            addTodo();
+            addbill();
             
         }
-    })
-    todoInput2.addEventListener('change',function(e){
-        
-    })
+    })    
 
-
-    //필터 버튼들을 가져와서 이벤트를 등록
+    
     filterBtns.forEach(function(btn){
         btn.addEventListener('click', function(ev){
             setFilter(ev.target.dataset.filter);
@@ -63,10 +60,10 @@ function bindEvents() {
     balance()
 }
 
-//새로운 내역 추가하는 함수
-function addTodo() {
-    const text = todoInput.value.trim();
-    const won = todoInput2.value.trim();
+//새로운 내역 추가 함수
+function addbill() {
+    const text = billInput.value.trim();
+    const won = billInputamount.value.trim();
     const type = typeState;
     
     if (!text || !won) return; 
@@ -76,19 +73,19 @@ function addTodo() {
         description: text,
         amount: won,
         type: type,
-        date: new Date().toLocaleDateString(), //생성시간
+        date: new Date().toLocaleDateString(), //생성 일 까지만 시간 안나옴
     }
 
-    bills.push(bill); //새로운 내역을 목록에 추가
-    todoInput.value = "";
-    todoInput2.value ="";
-    saveTodos();
+    bills.push(bill); 
+    billInput.value = "";
+    billInputamount.value ="";
+    savebills();
     balance()
-    render(); //내역목록을 기준으로 UI에 적용
+    render(); 
 }
 
-function deleteTodo(id){
-    //해당 ID를 목록에서 제거.
+function deletebill(id){
+    
     let newbills = [];
     for(let bill of bills){
         if(bill.id === id)
@@ -98,15 +95,15 @@ function deleteTodo(id){
     }
 
     bills = newbills;
-    saveTodos();
+    savebills();
     balance()
-    render(); //내역목록을 기준으로 UI에 적용
+    render(); 
 }
 
 
 
 
-function getFilteredTodos(){
+function getFilteredbills(){
     const filteredbills = [];
     if(filterState === 'incomes'){
         
@@ -130,42 +127,41 @@ function getFilteredTodos(){
 }
 
 //내역목록을 로컬스토리지영역에 저장하는 함수
-function saveTodos(){
+function savebills(){
     localStorage.setItem('bills', JSON.stringify(bills));
 }
 
 //=========== 화면 렌더링을 위한 함수 ====================
 //메인 렌더링 함수
 function render() {
-    todoList.innerHTML = ""; //기존 UI 제거
+    billList.innerHTML = ""; 
 
-    //현재 필터에 맞는 내역만 목록으로 가져오기
-    const filteredTodos = getFilteredTodos();
-    console.log("filteredTodos"+filteredTodos)
-    if (filteredTodos.length === 0) { //내역목록이 비어있다면
+    const filteredbills = getFilteredbills();
+    console.log("filteredbills"+filteredbills)
+    if (filteredbills.length === 0) { 
         emptyStateRender();
-    } else { //내역 목록이 있는 경우
-        filteredTodos.forEach(function (bill) {
-            todoItemRender(bill);
+    } else { 
+        filteredbills.forEach(function (bill) {
+            billItemRender(bill);
         })
     }
     
     
-    // updateClearButton();
+  
 }
 
 function emptyStateRender(){
    const emptyEl = document.createElement('div');
     emptyEl.className = 'empty-state';
     emptyEl.innerHTML = '내역이 없습니다.'
-    todoList.appendChild(emptyEl);
+    billList.appendChild(emptyEl);
 }
 
-function todoItemRender(bill) {
-    const todoItem = document.createElement('li');
-    todoItem.className = 'todo-item' //+ (bill.completed ? ' completed' : '');
+function billItemRender(bill) {
+    const billItem = document.createElement('li');
+    billItem.className = 'bill-item' 
 
-    todoItem.innerHTML = `<div class="todo-checkbox "></div>
+    billItem.innerHTML = `<div class="bill-checkbox "></div>
                             <div class ="item-name">
                             <p style="font-size:10px; font-weight:200; color:grey">${bill.date}</p>
                             <span>${bill.description}</span>
@@ -174,17 +170,17 @@ function todoItemRender(bill) {
                             <button class="delete-btn">삭제</button>`;
 
     //새로 생성된 요소들 중에서 이벤트가 필요한 부분만 가져오기.
-    const checkBox = todoItem.querySelector('.todo-checkbox'); //todoItem내부에 있는 checkbox요소
+    const checkBox = billItem.querySelector('.bill-checkbox'); 
     checkBox.addEventListener('click', function(){
-        toggleTodo(bill.id);
+        togglebill(bill.id);
     })
 
-    const deleteBtn = todoItem.querySelector('.delete-btn'); //todoItem내부에 있는 deleteBtn요소
+    const deleteBtn = billItem.querySelector('.delete-btn'); 
     deleteBtn.addEventListener('click', function(){
-        deleteTodo(bill.id);
+        deletebill(bill.id);
     })
-    const inCome = todoItem.querySelector('.income');
-    const exPend = todoItem.querySelector('.expend');
+    const inCome = billItem.querySelector('.income');
+    const exPend = billItem.querySelector('.expend');
     if(inCome){
         inCome.innerText= "+ " + bill.amount.toLocaleString()+"원"
     }else{
@@ -192,16 +188,16 @@ function todoItemRender(bill) {
     }
     
     
-    todoList.appendChild(todoItem);
+    billList.appendChild(billItem);
 }
 
 
 //======== 필터관련 함수 ==============
-//필터를 설정하고 UI를 업데이트
-function setFilter(filter){
-    filterState = filter; //전역상태에 필터상태를 변경
 
-    //모든 필터버튼의 active클래스를 조회해서 수정
+function setFilter(filter){
+    filterState = filter; 
+
+
     filterBtns.forEach(function(btn){
         btn.className = (btn.dataset.filter === filter ? "active" : "");
     });
@@ -218,11 +214,12 @@ function inputtype(type){
     render();
 }
 
+//잔액 
 function balance(){
     let balances  =0;
     let incomes =0;
     let expends =0;
-    const balancesId =document.querySelectorAll('#balance');
+    
     
     bills.forEach(function(bill){
         const amount = Number(bill.amount); 
@@ -239,8 +236,7 @@ function balance(){
     balancesId.forEach(function(bal){
         bal.innerText = balances.toLocaleString()+"원";
     })
-    const incomeshtml =document.getElementById('greencol')
-    const expendshtml =document.getElementById('redcol')
+    
     incomeshtml.innerText = incomes.toLocaleString() + "원"
     expendshtml.innerText = expends.toLocaleString() + "원"
     render();
