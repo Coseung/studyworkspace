@@ -161,13 +161,15 @@ function billItemRender(bill) {
     const billItem = document.createElement('li');
     billItem.className = 'bill-item' 
 
-    billItem.innerHTML = `<div class="bill-checkbox "></div>
+    billItem.innerHTML = `<div class="bill-checkbox"></div>
                             <div class ="item-name">
                             <p style="font-size:10px; font-weight:200; color:grey">${bill.date}</p>
                             <span>${bill.description}</span>
                             </div>
                             <span class="amount ${bill.type}">${bill.amount}원</span>
-                            <button class="delete-btn">삭제</button>`;
+                            <button class="delete-btn">삭제</button>
+                            <button class="change-btn">수정</button>
+                            `;
 
     //새로 생성된 요소들 중에서 이벤트가 필요한 부분만 가져오기.
     const checkBox = billItem.querySelector('.bill-checkbox'); 
@@ -187,6 +189,7 @@ function billItemRender(bill) {
         exPend.innerText ="- " + bill.amount.toLocaleString()+"원"
     }
     
+    const changeBtn = billItem.querySelector()
     
     billList.appendChild(billItem);
 }
