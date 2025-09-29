@@ -96,7 +96,7 @@ function deletebill(id){
 
     bills = newbills;
     savebills();
-    balance()
+    balance();
     render(); 
 }
 
@@ -189,10 +189,41 @@ function billItemRender(bill) {
         exPend.innerText ="- " + bill.amount.toLocaleString()+"원"
     }
     
-    const changeBtn = billItem.querySelector()
+    const changeBtn = billItem.querySelector('.change-btn');
+    changeBtn.addEventListener('click', function(){
+        billItem.innerHTML ="";
+        
+        billItem.innerHTML=`<div class ="item-name">
+                            <label for=""> 내용 수정 : <input type="text" class="edit-desc" value=${bill.description}> </label> 
+                            </div>
+                            <label for=""> 금액수정<input type="number" class="edit-amount" value=${bill.amount}></label>
+                            <button class="save-btn">저장</button>`;
+        
+        const saveBtn = billItem.querySelector('.save-btn');
+        const editDesc = billItem.querySelector('.edit-desc');
+        const editAmount = billItem.querySelector('.edit-amount');
+
+        saveBtn.addEventListener('click', function() {
+            var newDesc = editDesc.value.trim();
+            var newAmount = Number(editAmount.value);
+
+            if (!newDesc || !newAmount) {
+                return;
+            }
+
+            bill.description = newDesc;
+            bill.amount = newAmount;
+            savebills();
+            balance();
+            render();
+        })
+    })
     
     billList.appendChild(billItem);
 }
+
+
+
 
 
 //======== 필터관련 함수 ==============
