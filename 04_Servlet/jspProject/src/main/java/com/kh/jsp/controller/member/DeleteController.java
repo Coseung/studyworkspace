@@ -1,5 +1,10 @@
 package com.kh.jsp.controller.member;
 
+import java.io.IOException;
+
+import com.kh.jsp.model.vo.Member;
+import com.kh.jsp.service.MemberService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,14 +12,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import java.io.IOException;
-
-import com.kh.jsp.model.vo.Member;
-
 /**
  * Servlet implementation class DeleteController
  */
-@WebServlet("/DeleteController")
+@WebServlet("/delete.me")
 public class DeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,7 +31,8 @@ public class DeleteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userPwd =request.getParameter("userPwd");
+		String userPwd = request.getParameter("userPwd");
+		
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
@@ -40,9 +42,18 @@ public class DeleteController extends HttpServlet {
 			return;
 		}
 		
-		new MemberService().deleteMember(loginMember.get)
+		int result = new MemberService().deleteMember(loginMember.getMemberId());
 		
-		
+		if(result == 0) { //업데이트 실패
+			request.setAttribute("errorMsg", "회원탈퇴에 실패하였습니다");
+			request.getRequestDispatcher("views/common/error.jsp").forward(request, response);
+		} else {
+			session.removeAttribute("loginMember");
+			session.setAttribute("alertMsg", "성공적으로 탈퇴하였습니다.");
+			
+			response.sendRedirect(request.getContextPath());
+		}
+	
 	}
 
 	/**
