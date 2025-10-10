@@ -55,7 +55,7 @@
         }
 
         .board-table th {
-            font-weight: 500;
+            font-weight: 500;su
         }
 
         .board-table tbody tr {
@@ -89,10 +89,19 @@
             <h2>일반게시판</h2>
 
             <div class="write-btn-area">
-                <a class="btn btn-primary" href="">글쓰기</a>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/enrollForm.bo">글쓰기</a>
             </div>
 
+            <!-- Board b = new Board();
+				b.setBoardNo(rset.getInt("board_no"));
+				b.setCategory(rset.getString("category_name"));
+				b.setBoardTitle(rset.getString("board_title"));
+				b.setBoardWriter(rset.getString("member_id"));
+				b.setCount(rset.getInt("count"));
+				b.setCreateDate(rset.getString("create_date"));
+				list.add(b); -->
             <table class="board-table">
+               
                 <thead>
                     <tr>
                         <th width="70">글번호</th>
@@ -103,24 +112,19 @@
                         <th width="100">작성일</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>운동</td>
-                        <td>안녕하세요.</td>
-                        <td>user01</td>
-                        <td>123</td>
-                        <td>2025-03-12</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>기타</td>
-                        <td>문의 남깁니다.</td>
-                        <td>user02</td>
-                        <td>13</td>
-                        <td>2025-01-08</td>
-                    </tr>
+                 <tbody>
+                    <c:forEach var="b" items="${boardList}">
+                        <tr>
+                            <td>${b.boardNo}</td>
+                            <td>${b.category}</td>
+                            <td>${b.boardTitle}</td>
+                            <td>${b.boardWriter}</td>
+                            <td>${b.count}</td>
+                            <td>${b.createDate}</td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
+                
             </table>
 
             <div class="pagination">
@@ -133,7 +137,7 @@
               	<button class="btn btn-outline-primary" >4</button>
               	<button class="btn btn-outline-primary" >5</button>
            	    <button class="btn btn-primary">
-                &lt; 다음
+                다음 &gt; 
                 </button>
             </div>
         </div>
