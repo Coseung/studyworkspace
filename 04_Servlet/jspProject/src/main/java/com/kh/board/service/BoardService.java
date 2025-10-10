@@ -50,4 +50,14 @@ public class BoardService {
 		return result;
 	}
 
+	public Board selctdetail(int boardDetailNo) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+
+		Board b = new BoardDao().selectBoard(boardDetailNo, conn);
+
+		close(conn);
+		return b;
+	}
+
 }

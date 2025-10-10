@@ -56,4 +56,16 @@
 					?
 			)
 	</entry>
+	<entry key ="selectBoard">
+	SELECT BOARD_NO,
+			   CATEGORY_NAME,
+               BOARD_TITLE,
+               BOARD_CONTENT,
+               MEMBER_ID,
+               TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') AS "CREATE_DATE"
+          FROM BOARD
+          LEFT JOIN CATEGORY USING(CATEGORY_NO)
+          JOIN MEMBER ON(BOARD_WRITER = MEMBER_NO)
+         WHERE BOARD_NO = ?
+	</entry>
 </properties>

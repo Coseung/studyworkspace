@@ -112,9 +112,9 @@
                         <th width="100">작성일</th>
                     </tr>
                 </thead>
-                 <tbody>
+                 <tbody >
                     <c:forEach var="b" items="${boardList}">
-                        <tr>
+                        <tr onclick="location.href='${pageContext.request.contextPath}/detail.bo?bno=${b.boardNo}'">
                             <td>${b.boardNo}</td>
                             <td>${b.category}</td>
                             <td>${b.boardTitle}</td>

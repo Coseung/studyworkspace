@@ -131,21 +131,21 @@
 			<table class="detail-table">
 				<tr>
 					<th>카테고리</th>
-					<td></td>
+					<td>${b.category}</td>
 					<th>제목</th>
-					<td colspan="3"></td>
+					<td colspan="3">${b.boardTitle}</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td></td>
+					<td>${b.boardWriter}</td>
 					<th>작성일</th>
-					<td></td>
+					<td>${b.createDate}</td>
 				</tr>
 				<tr>
 					<th>내용</th>
 					<td colspan="3">
 						<div class="content-area">
-							
+							${b.boardContent}
 						</div>
 					</td>
 				</tr>
@@ -158,9 +158,9 @@
 			</table>
 
 			<div class="button-group">
-				<a class="btn btn-primary">목록가기</a>
-				<a class="btn btn-warning">수정하기</a>
-				<a class="btn btn-danger">삭제하기</a>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/list.bo">목록가기</a>
+				<a class="btn btn-warning" href="${pageContext.request.contextPath}/update.bo">수정하기</a>
+				<a class="btn btn-danger" href="${pageContext.request.contextPath}/delete.bo">삭제하기</a>
 			</div>
 		</div>
 

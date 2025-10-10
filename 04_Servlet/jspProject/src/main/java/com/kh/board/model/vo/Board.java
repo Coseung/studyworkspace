@@ -48,5 +48,13 @@ public class Board {
 		b.setMemberId(memberId);
 		return b;
 	}
+
+	public Board(String category, String boardTitle, String boardContent, String boardWriter, String createDate) {
+		this.category = category;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardWriter = boardWriter;
+		this.createDate = createDate;
+	}
 	
 }

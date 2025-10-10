@@ -124,4 +124,39 @@ private Properties prop = new Properties();
 
 		return result;
 	}
+
+	public Board selectBoard(int boardDetailNo, Connection conn) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Board b = null;
+
+		String sql = prop.getProperty("selectBoard");
+
+//		CATEGORY_NAME,
+//        BOARD_TITLE,
+//        BOARD_CONTENT,
+//        MEMBER_ID,
+//        TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') AS "CREATE_DATE"
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardDetailNo);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				b = new Board(rset.getString("CATEGORY_NAME"), rset.getString("BOARD_TITLE"),
+						rset.getString("BOARD_CONTENT"), rset.getString("MEMBER_ID"), rset.getString("CREATE_DATE"));
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return b;
+	}
 }
