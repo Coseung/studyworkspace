@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import com.kh.board.model.vo.Category;
 import com.kh.board.service.BoardService;
-import com.kh.jsp.model.vo.Member;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -47,7 +46,7 @@ public class BoardEnrollFormController extends HttpServlet {
 				request.getRequestDispatcher("views/common/error.jsp").forward(request, response);
 
 			} else {
-				Member loginMember = (Member) session.getAttribute("loginMember");
+//				Member loginMember = (Member) session.getAttribute("loginMember");
 
 				request.setAttribute("CategoryList", list);
 				request.getRequestDispatcher("/views/board/enrollForm.jsp").forward(request, response);

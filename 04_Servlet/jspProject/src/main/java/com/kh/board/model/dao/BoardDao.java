@@ -144,7 +144,7 @@ private Properties prop = new Properties();
 			pstmt.setInt(1, boardDetailNo);
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
-				b = new Board(rset.getString("CATEGORY_NAME"), rset.getString("BOARD_TITLE"),
+				b = new Board(boardDetailNo, rset.getString("CATEGORY_NAME"), rset.getString("BOARD_TITLE"),
 						rset.getString("BOARD_CONTENT"), rset.getString("MEMBER_ID"), rset.getString("CREATE_DATE"));
 
 			}
@@ -158,5 +158,32 @@ private Properties prop = new Properties();
 		}
 
 		return b;
+	}
+
+	public int updateBoard(Board b, Connection conn) {
+
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateBoard");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, b.getBoardType());
+			pstmt.setInt(2, b.getCategoryNo());
+			pstmt.setString(3, b.getBoardTitle());
+			pstmt.setString(4, b.getBoardContent());
+			pstmt.setInt(5, b.getBoardNo());
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+
 	}
 }

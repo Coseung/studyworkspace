@@ -4,12 +4,14 @@ import java.io.IOException;
 
 import com.kh.board.model.vo.Board;
 import com.kh.board.service.BoardService;
+import com.kh.jsp.model.vo.Member;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class BoardDetailController
@@ -31,9 +33,15 @@ public class BoardDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
 		int boardDetailNo = Integer.parseInt(request.getParameter("bno"));
 
 		Board b = new BoardService().selctdetail(boardDetailNo);
+
+		if (loginMember != null && loginMember.getMemberId().equals(b.getBoardWriter())) {
+			request.setAttribute("isWriter", true);
+		}
 
 		if (b != null) {
 			request.setAttribute("b", b);
@@ -42,6 +50,7 @@ public class BoardDetailController extends HttpServlet {
 			request.setAttribute("errorMsg", "게시물을 불러오는데 실패하였습니다.");
 			request.getRequestDispatcher("views/common/error.jsp");
 		}
+
 	}
 
 	/**

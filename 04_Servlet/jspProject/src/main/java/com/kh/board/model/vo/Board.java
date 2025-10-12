@@ -37,7 +37,7 @@ public class Board {
 
 	}
 
-	public static Board insertCreateMember(int boardType, int categoryNo, String title, String content,
+	public static Board insertCreateBoard(int boardType, int categoryNo, String title, String content,
 			int memberId) {
 
 		Board b = new Board();
@@ -49,7 +49,20 @@ public class Board {
 		return b;
 	}
 
-	public Board(String category, String boardTitle, String boardContent, String boardWriter, String createDate) {
+	public static Board updateBoard(int boardNo, int boardType, int categoryNo, String title, String content) {
+
+		Board b = new Board();
+		b.setBoardNo(boardNo);
+		b.setBoardType(boardType);
+		b.setCategoryNo(categoryNo);
+		b.setBoardTitle(title);
+		b.setBoardContent(content);
+		return b;
+	}
+
+	public Board(int boardNo, String category, String boardTitle, String boardContent, String boardWriter,
+			String createDate) {
+		this.boardNo = boardNo;
 		this.category = category;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;

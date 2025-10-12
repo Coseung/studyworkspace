@@ -14,16 +14,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class BoardInsertController
+ * Servlet implementation class BoardUpdateInsertController
  */
-@WebServlet("/insert.bo")
-public class BoardInsertController extends HttpServlet {
+@WebServlet("/updateinsert.bo")
+public class BoardUpdateInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardInsertController() {
+    public BoardUpdateInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,6 +32,7 @@ public class BoardInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
 
 		Member loginMember = (Member) session.getAttribute("loginMember");
@@ -39,21 +40,19 @@ public class BoardInsertController extends HttpServlet {
 		int categoryNo = Integer.parseInt(request.getParameter("category"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		int boardDetailNo = Integer.parseInt(request.getParameter("bno"));
 
+		Board b = Board.updateBoard(boardDetailNo, boardType, categoryNo, title, content);
 
-		Board b = Board.insertCreateBoard(boardType, categoryNo, title, content, loginMember.getMemberNo());
-		int result = new BoardService().insertBoard(b);
+		int result = new BoardService().updateBoard(b);
+		if (result > 0) {
+			request.getSession().setAttribute("alertMsg", "게시글 수정 성공");
+			response.sendRedirect(request.getContextPath() + "/detail.bo?bno=" + b.getBoardNo());
+		} else {
 
-		if (result > 0) { // 가입성공
-			request.getSession().setAttribute("alertMsg", "성공적으로 게시판등록이 완료되었습니다..");
-
-			response.sendRedirect(request.getContextPath() + "/list.bo");
-
-		} else { // 가입실패
-			request.setAttribute("errorMsg", "게시판등록에 실패하였습니다.");
-			request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("errorMsg", "게시글 수정 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-
 	}
 
 	/**

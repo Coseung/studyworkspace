@@ -1,29 +1,29 @@
 package com.kh.jsp.controller.board;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.Category;
 import com.kh.board.service.BoardService;
-import com.kh.jsp.model.vo.Member;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class BoardInsertController
+ * Servlet implementation class BoardUpdateController
  */
-@WebServlet("/insert.bo")
-public class BoardInsertController extends HttpServlet {
+@WebServlet("/update.bo")
+public class BoardUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardInsertController() {
+    public BoardUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,27 +32,25 @@ public class BoardInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		int boardType = 1; // 일반 게시글 일때 어떤방식으로 가져와야하는지 모르겠어서 하드코딩
-		int categoryNo = Integer.parseInt(request.getParameter("category"));
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
 
 
-		Board b = Board.insertCreateBoard(boardType, categoryNo, title, content, loginMember.getMemberNo());
-		int result = new BoardService().insertBoard(b);
+		int boardDetailNo = Integer.parseInt(request.getParameter("bno"));
 
-		if (result > 0) { // 가입성공
-			request.getSession().setAttribute("alertMsg", "성공적으로 게시판등록이 완료되었습니다..");
+		ArrayList<Category> list = new BoardService().selectCategoryList();
 
-			response.sendRedirect(request.getContextPath() + "/list.bo");
+		Board b = new BoardService().selctdetail(boardDetailNo);
 
-		} else { // 가입실패
-			request.setAttribute("errorMsg", "게시판등록에 실패하였습니다.");
+		if (b != null) {
+			request.setAttribute("b", b);
+			request.setAttribute("CategoryList", list);
+			request.getRequestDispatcher("/views/board/updateForm.jsp").forward(request, response);
+
+		} else {
+
+			request.setAttribute("errorMsg", "게시물을 불러오는데 실패하였습니다.");
 			request.getRequestDispatcher("views/common/error.jsp");
 		}
+
 
 	}
 

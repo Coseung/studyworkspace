@@ -2,8 +2,25 @@ select * from BOARD;
 select * from CATEGORY;
 select * from Member;
 
-
-
+SELECT CATEGORY_NAME 
+FROM CATEGORY;
+INSERT 
+		INTO BOARD(
+					BOARD_NO,
+					BOARD_TYPE,
+					CATEGORY_NO,
+					BOARD_TITLE,
+					BOARD_CONTENT,
+					BOARD_WRITER
+					)
+			VALUES(
+					SEQ_BNO.NEXTVAL,
+					1,
+					10,
+					'안녕하세요',
+					'안녕',
+					1
+			);
 
 SELECT BOARD_NO,
 			   CATEGORY_NAME,
@@ -14,7 +31,7 @@ SELECT BOARD_NO,
           FROM BOARD
           LEFT JOIN CATEGORY USING(CATEGORY_NO)
           JOIN MEMBER ON(BOARD_WRITER = MEMBER_NO)
-         WHERE BOARD_NO = 3;
+         WHERE BOARD_NO = 1;
          
  SELECT BOARD_NO,
 		                   CATEGORY_NAME,

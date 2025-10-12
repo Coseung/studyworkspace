@@ -88,25 +88,28 @@
 		<div class="board-card">
 			<h2>일반게시글 수정하기</h2>
 
-			<form action="" method="" >
+			<form action="${pageContext.request.contextPath}/updateinsert.bo?bno=${b.boardNo}" method="POST" >
 				<table class="form-table">
 					<tr>
 						<th>카테고리</th>
 						<td>
 							<select name="category">
+									<c:forEach var="c" items="${CategoryList}">
+										<option value="${c.categoryNo}">${c.categoryName}</option>	
+									</c:forEach>		
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<th>제목</th>
 						<td>
-							<input type="text" name="title" required value="">
+							<input type="text" name="title" required value="${b.boardTitle}">
 						</td>
 					</tr>
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea name="content" rows="10"></textarea>
+							<textarea name="content" rows="10">${b.boardContent}</textarea>
 						</td>
 					</tr>
 					<tr>
@@ -117,6 +120,7 @@
 					</tr>
 				</table>
 
+				
 				<div class="button-group">
 					<button type="submit" class="btn btn-primary">수정하기</button>
 					<button type="reset" class="btn btn-secondary">취소하기</button>
