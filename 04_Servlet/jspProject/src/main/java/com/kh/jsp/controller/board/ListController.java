@@ -3,8 +3,9 @@ package com.kh.jsp.controller.board;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.kh.board.model.vo.Board;
-import com.kh.board.service.BoardService;
+import com.kh.jsp.common.vo.PageInfo;
+import com.kh.jsp.model.vo.Board;
+import com.kh.jsp.service.BoardService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -32,16 +33,21 @@ public class ListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//board목록을 가져와서 응답페이지로 전달
-		ArrayList<Board> list = new BoardService().selectList();
-		System.out.println("리스트: " + list);
-		if (list.isEmpty()) {
-			request.setAttribute("errorMsg", "없어요 리스트가");
-		} else {
-			request.setAttribute("boardList", list);
-			request.setAttribute("errorMsg", "있어요 리스트가");
-		}
+		//모든 board의 목록이 아닌 당장 보여줄 페이지의 목록만 가져오기
+		
+		//-------------------페이징 처리-----------------------------
+		int currentPage = request.getParameter("cpage") != null ? 
+							Integer.parseInt(request.getParameter("cpage")) : 1; //지금 보여줄 페이지(사용자가 요청한 페이지)
+		int listCount = new BoardService().selectAllBoardCount();//현재 총 게시글 수
+		int pageLimit = 5; //페이지 버튼을 몇개 보여줄 것인가
+		int boardLimit = 5; //한 페이지에 데이터를 몇개 보여줄 것인가?
 
-
+		PageInfo pi = new PageInfo(currentPage, listCount, pageLimit, boardLimit);
+		
+		ArrayList<Board> list = new BoardService().selectAllBoard(pi);
+		
+		request.setAttribute("list", list);
+		request.setAttribute("pi", pi);
 		request.getRequestDispatcher("views/board/listView.jsp").forward(request, response);
 	}
 

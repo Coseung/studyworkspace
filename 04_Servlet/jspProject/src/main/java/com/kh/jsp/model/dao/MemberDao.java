@@ -20,7 +20,7 @@ public class MemberDao {
 		super();
 		
 		String path = JDBCTemplate.class.getResource("/db/sql/member-mapper.xml").getPath();
-
+		
 		try {
 			prop.loadFromXML(new FileInputStream(path));
 		} catch (IOException e) {
@@ -86,7 +86,6 @@ public class MemberDao {
 							rset.getDate("MODIFY_DATE"),
 							rset.getString("STATUS")
 						);
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

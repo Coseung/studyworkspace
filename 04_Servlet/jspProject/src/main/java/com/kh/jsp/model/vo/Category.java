@@ -1,4 +1,4 @@
-package com.kh.board.model.vo;
+package com.kh.jsp.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,6 +14,4 @@ import lombok.ToString;
 public class Category {
 	private int categoryNo;
 	private String categoryName;
-	
-
 }
