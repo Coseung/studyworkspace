@@ -114,5 +114,22 @@
             </form>
         </div>
     </div>
+    <script>
+        function idDulpicateCheck() {
+            const checkId = document.querySelector("#enroll-form intput[name=userId]").value;
+
+
+            $.ajax({
+                url:"idDulpicateCheck.me",
+                type: "get",
+                data :{},
+                success : function(){
+                    console.log("성공",result);
+                },error: function(e){
+                    console.log("실패");
+                }
+            })
+        }
+    </script>
 </body>
 </html>

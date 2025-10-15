@@ -14,7 +14,7 @@
 			INTEREST
 		)
 		VALUES(
-			SEQ_UNO.NEXTVAL, 
+			SEQ_MNO.NEXTVAL, 
 			?, 
 			?, 
 			?, 
@@ -78,18 +78,9 @@
 			   MODIFY_DATE = SYSDATE
 		 WHERE MEMBER_ID = ?
 	</entry>
-	<entry key="selectList">
-		SELECT BOARD_NO,
-		CATEGORY_NAME,
-		BOARD_TITLE,
-		MEMBER_ID,
-		COUNT,
-		TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') AS "CREATE_DATE"
-		FROM BOARD B
-		JOIN CATEGORY USING(CATEGORY_NO)
-		JOIN MEMBER M ON(BOARD_WRITER = MEMBER_NO)
-		WHERE B.STATUS = 'Y'
-		AND BOARD_TYPE = 1
-		ORDER BY CREATE_DATE DESC
+	<entry key="idCheck">
+		SELECT COUNT(*) AS "COUNT"
+		  FROM MEMBER
+		 WHERE MEMBER_ID = ?
 	</entry>
 </properties>

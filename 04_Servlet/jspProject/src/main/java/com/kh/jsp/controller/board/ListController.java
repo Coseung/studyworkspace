@@ -41,7 +41,7 @@ public class ListController extends HttpServlet {
 		int listCount = new BoardService().selectAllBoardCount();//현재 총 게시글 수
 		int pageLimit = 5; //페이지 버튼을 몇개 보여줄 것인가
 		int boardLimit = 5; //한 페이지에 데이터를 몇개 보여줄 것인가?
-
+		
 		PageInfo pi = new PageInfo(currentPage, listCount, pageLimit, boardLimit);
 		
 		ArrayList<Board> list = new BoardService().selectAllBoard(pi);

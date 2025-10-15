@@ -1,12 +1,8 @@
-package com.kh.jsp.controller.board;
+package com.kh.jsp.controller.member;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import com.kh.jsp.model.vo.Attachment;
-import com.kh.jsp.model.vo.Board;
-import com.kh.jsp.model.vo.Category;
-import com.kh.jsp.service.BoardService;
+import com.kh.jsp.service.MemberService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,16 +11,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class UpdateController
+ * Servlet implementation class AjaxIdCheckController
  */
-@WebServlet(name = "updateForm.bo", urlPatterns = { "/updateForm.bo" })
-public class UpdateFormController extends HttpServlet {
+@WebServlet("/idDulpicateCheck.me")
+public class AjaxIdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateFormController() {
+    public AjaxIdCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,19 +29,15 @@ public class UpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int boardNo = Integer.parseInt(request.getParameter("bno"));
+		String checkId = request.getParameter("checkId");
 		
-		BoardService boardService = new BoardService();
+		int count = new MemberService().idCheck(checkId);
 		
-		ArrayList<Category> categories = boardService.selectAllCategory();
-		Board b = boardService.selectBoardByBoardNo(boardNo);
-		Attachment at = boardService.selectAttachment(boardNo);
-		
-		request.setAttribute("categories", categories);
-		request.setAttribute("board", b);
-		request.setAttribute("at", at);
-		
-		request.getRequestDispatcher("views/board/updateForm.jsp").forward(request, response);
+		if(count > 0) { //회원이 존재.
+			response.getWriter().print("NNNNN");
+		} else { //회원이 존재하지 않음.
+			response.getWriter().print("NNNNY");
+		}
 	}
 
 	/**
