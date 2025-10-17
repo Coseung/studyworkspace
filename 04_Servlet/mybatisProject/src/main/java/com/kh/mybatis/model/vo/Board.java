@@ -1,4 +1,4 @@
-package com.kh.jsp.model.vo;
+package com.kh.mybatis.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,10 +21,10 @@ public class Board {
 	private int count;
 	private String createDate;
 	private String status;
-	
-	//데이터 전달용 필드
+
+	// 데이터 전달용 필드
 	private String categoryName;
 	private String memberId;
 	private String thumbnailImg;
-	
+
 }

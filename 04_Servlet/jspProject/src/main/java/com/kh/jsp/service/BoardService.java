@@ -35,6 +35,29 @@ public class BoardService {
 		return list;
 	}
 	
+	public ArrayList<Board> selectThumnailList(){
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new BoardDao().selectThumnailList(conn);
+		close(conn);
+		
+		return list;
+	}
+	
+	public int deleteReply(int replyNo){
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteReply(conn, replyNo);
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	
 	public int increaseCount(int boardNo) {
 		Connection conn = getConnection();
 		
@@ -56,6 +79,24 @@ public class BoardService {
 	
 		close(conn);
 		return board;
+	}
+
+	public int insertThumbnailBoard(Board b, ArrayList<Attachment> list) {
+		Connection conn = getConnection();
+
+		BoardDao bDao = new BoardDao();
+		int result1 = bDao.insertThumbnailBoard(conn, b);
+		int result2 = bDao.insertAttachmentList(conn, list);
+
+		if (result1 > 0 && result2 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+
+		close(conn);
+
+		return result1 * result2;
 	}
 	
 	public Attachment selectAttachment(int boardNo) {
