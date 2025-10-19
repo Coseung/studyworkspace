@@ -43,4 +43,43 @@ public class MemberService {
 		sqlSession.close();
 		return result;
 	}
+
+	public Member updateMember(Member updateMember) {
+		// TODO Auto-generated method stub
+		SqlSession sqlSession = Template.getSqlSession();
+		int result = memberDao.updateMember(updateMember, sqlSession);
+
+		Member updMember = null;
+
+		if (result > 0) {
+			sqlSession.commit();
+			updMember = new MemberDao().selectMemberByUserId(updateMember.getMemberId(), sqlSession);
+		} else {
+			sqlSession.rollback();
+		}
+
+		sqlSession.close();
+		return updMember;
+	}
+
+	public Member updateMemberPwd(String memberId, String updatePwd) {
+
+		SqlSession sqlSession = Template.getSqlSession();
+		System.out.println("서비스 데이터 : " + memberId + " 업데이트 : " + updatePwd);
+
+		int result = new MemberDao().updateMemberPwd(memberId, updatePwd, sqlSession);
+		Member updateMember = null;
+		if (result > 0) {
+			sqlSession.commit();
+
+			updateMember = new MemberDao().selectMemberByUserId(memberId, sqlSession);
+		} else {
+			sqlSession.rollback();
+		}
+
+		sqlSession.close();
+
+		return updateMember;
+
+	}
 }

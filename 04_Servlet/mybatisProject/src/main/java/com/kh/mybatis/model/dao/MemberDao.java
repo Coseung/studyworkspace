@@ -25,6 +25,28 @@ public class MemberDao {
 		return sqlSession.insert("MemberMapper.insertMember", m);
 	}
 
+	public int updateMember(Member m, SqlSession sqlSession) {
+
+		return sqlSession.update("MemberMapper.updateMember", m);
+	}
+
+	public Member selectMemberByUserId(String memberId, SqlSession sqlSession) {
+		// TODO Auto-generated method stub
+
+		Member selectMemberUserId = sqlSession.selectOne("MemberMapper.selectMemberByMemberId", memberId);
+		return selectMemberUserId;
+	}
+
+	public int updateMemberPwd(String memberId, String updatePwd, SqlSession sqlSession) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("updatePwd", updatePwd);
+
+		System.out.println("다오 데이터: " + map + "memberId" + memberId + "updatePwd" + updatePwd);
+		int result = sqlSession.update("MemberMapper.updateMemberPwd", map);
+		return result;
+	}
 }
 
 

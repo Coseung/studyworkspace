@@ -168,7 +168,7 @@
 			</table>
 
 			<div class="button-group">
-				<a class="btn btn-primary">목록가기</a>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/list.bo?cpage=1">목록가기</a>
 				<c:if test="${loginMember != null && loginMember.memberId == board.memberId}">
 					<a class="btn btn-warning" href="${pageContext.request.contextPath}/updateForm.bo?bno=${board.boardNo}">수정하기</a>
 					<a class="btn btn-danger" href="${pageContext.request.contextPath}/delete.bo?bno=${board.boardNo}">삭제하기</a>
