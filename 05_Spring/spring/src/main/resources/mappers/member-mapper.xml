@@ -63,4 +63,19 @@
             #{interest}
         )
     </insert>
+    <update id="updateMember" parameterType ="Member" >
+        UPDATE MEMBER
+        SET PHONE = #{phone},
+        EMAIL = #{email},
+        ADDRESS = #{address},
+        INTEREST = #{interest},
+        MODIFY_DATE = SYSDATE
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+    <update id="updateMemberPwd" parameterType ="hashmap">
+        UPDATE MEMBER
+        SET MEMBER_PWD = #{updatePwd},
+        MODIFY_DATE = SYSDATE
+        WHERE MEMBER_ID = #{memberId}
+    </update>
 </mapper>
