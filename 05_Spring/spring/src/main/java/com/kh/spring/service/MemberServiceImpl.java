@@ -20,6 +20,7 @@ public class MemberServiceImpl implements MemberService {
         return memberMapper.getMemberById(memberId);
     }
 
+    //getMemberCountById
     @Override
     public int getMemberCountById(String memberId) {
         return memberMapper.getMemberCountById(memberId);
