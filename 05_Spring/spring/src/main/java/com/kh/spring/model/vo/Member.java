@@ -1,8 +1,6 @@
 package com.kh.spring.model.vo;
 
-
 import lombok.*;
-
 import java.sql.Date;
 
 @Getter
@@ -56,6 +54,4 @@ public class Member {
 
         return m;
     }
-
-
 }

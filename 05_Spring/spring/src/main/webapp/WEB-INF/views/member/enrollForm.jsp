@@ -108,7 +108,7 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <button disabled type="submit" class="btn btn-primary btn-lg me-3" onclick="return validationCheck()">회원가입</button>
+                    <button  type="submit" class="btn btn-primary btn-lg me-3" onclick="return validationCheck()">회원가입</button>
                     <button type="reset" class="btn btn-outline-secondary btn-lg">다시입력</button>
                 </div>
             </form>
