@@ -11,6 +11,9 @@ const UserDetail = () => {
   const userId = parseInt(id);
   const user = users[userId];
 
+
+   
+
   return (
     <div>
       <h1>유저 상세 정보</h1>
@@ -22,7 +25,7 @@ const UserDetail = () => {
       </div>
       
       <button onClick={() => navigate('/')}>
-        ← 목록으로 돌아가기
+        목록으로 돌아가기
       </button>
     </div>
   )

@@ -15,7 +15,7 @@ function App() {
     <BrowserRouter>
     <UserProvider> 
       <nav>
-        <Link to="/" style={{ marginRight: "10px" }} element={<UserList/>}>
+        <Link to="/" style={{ marginRight: "10px" }}>
           회원 목록
         </Link>
 

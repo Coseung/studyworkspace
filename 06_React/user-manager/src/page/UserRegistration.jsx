@@ -23,6 +23,7 @@ const UserRegist = () => {
         addUser(newUser);
         navigate("/");
     }
+    // const handleChangeName = (ev) =>{setName(ev.target.value)}
 
     
 
