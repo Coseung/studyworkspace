@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { GithubProvider } from './components/GithubContext.jsx'
-import PushResult from './pages/PushResult.jsx'
-
+import { UserProvider } from './components/UserContext.jsx'
+import  AppRoutes  from './routes/routes.jsx'
 function App() {
   
-
   return (
-    <GithubProvider>
-      <PushResult></PushResult>
-    </GithubProvider>
+    <UserProvider>
+      <GithubProvider>
+        <AppRoutes />
+      </GithubProvider>
+    </UserProvider>
   )
 }
 

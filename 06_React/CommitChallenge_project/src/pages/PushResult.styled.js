@@ -1,105 +1,104 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-    text-align: center;
-`
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+`;
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+`;
 
 export const Title = styled.h1`
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 30px;
-`
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+`;
+
+export const UserInfo = styled.p`
+  font-size: 14px;
+  color: #666;
+  margin: 4px 0;
+`;
+
+export const LogoutButton = styled.button`
+  padding: 8px 16px;
+  border: none;
+  background: #ff4444;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background: #cc0000;
+  }
+`;
 
 export const SearchBox = styled.div`
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 30px;
-`
-
-export const Input = styled.input`
-    padding: 12px;
-    font-size: 16px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    width: 200px;
-    outline: none;
-    transition: border-color 0.2s;
-
-    &:focus { 
-        border-color: #5833ff; 
-    }
-`
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  justify-content: center;
+`;
 
 export const Button = styled.button`
-    padding: 12px 24px;
-    background-color: #5833ff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform 0.1s, background-color 0.2s;
+  padding: 12px 24px;
+  border: none;
+  color: #ffffff;
+  background: #5833ff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
 
-    &:disabled { 
-        background-color: #ccc; 
-        cursor: not-allowed;
-    }
+  &:hover {
+    background: #4526cc;
+  }
 
-    &:hover:not(:disabled) { 
-        transform: scale(0.98); 
-        background-color: #4e2ce0;
-    }
-`
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+`;
 
-export const StatusMessage = styled.h2`
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    color: #444;
-    height: 30px; 
-`
+export const StatusMessage = styled.div`
+  text-align: center;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 20px;
+`;
 
-export const List = styled.ul`
-    list-style: none;
-    padding: 0;
-    text-align: left;
-`
+export const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
 
-export const Item = styled.li`
-    background: #fff;
-    border: 1px solid #eee;
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-`
+export const Item = styled.div`
+  background: white;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+`;
 
 export const Time = styled.div`
-    font-weight: bold;
-    color: #5833ff;
-    margin-bottom: 5px;
-`
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+`;
 
 export const RepoName = styled.div`
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 10px;
-`
-
-export const CommitList = styled.ul`
-    list-style: none;
-    padding: 0;
-    background: #f9f9f9;
-    padding: 10px;
-    border-radius: 6px;
-    display: block; 
-`
-
-export const CommitItem = styled.li`
-    font-size: 0.9rem;
-    color: #333;
-    margin-bottom: 4px;
-`
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+`;

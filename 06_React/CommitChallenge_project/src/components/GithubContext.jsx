@@ -4,14 +4,14 @@ const GithubContext = React.createContext();
 
 
 export const GithubProvider = ({children}) => {
-  const [gitusername, setGitusername] =useState('');
+  const [gitUsername, setGitusername] =useState('');
   const[pushHistory,setPushHistory] = useState([]);
   const[status, setStatus] = useState('');
   const[loading,setLoading]= useState(false);
   
   const getTodayPush = async (username)=>{
 
-    const targetUsername = username || gitusername;
+    const targetUsername = username || gitUsername;
   
     console.log("아이디: ", targetUsername);
     if(!targetUsername && targetUsername ===""){
@@ -48,7 +48,7 @@ export const GithubProvider = ({children}) => {
 
 }  
 const values= {
-  gitusername, setGitusername, pushHistory, status, loading, getTodayPush, setLoading
+  gitUsername, setGitusername, pushHistory, status, loading, getTodayPush, setLoading
 }
 
 return (
