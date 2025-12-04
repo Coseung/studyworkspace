@@ -6,6 +6,7 @@ import LoginForm from '../pages/LoginForm.jsx';
 import SignupForm from '../pages/SignupForm.jsx';
 import PushResult from '../pages/PushResult.jsx';
 import PushDetail from '../pages/PushDetail.jsx';
+import MemoList from '../pages/MemoList.jsx';
 const AppRoutes = () => {
   const {currentUser} = useAuth();
   return (
@@ -31,6 +32,12 @@ const AppRoutes = () => {
           path={ROUTES.HOME}
           element={
             currentUser ? <PushResult /> : <Navigate to={ROUTES.LOGIN} />
+          }/>
+
+        <Route
+          path={ROUTES.MEMOLIST}
+          element={
+            currentUser ? <MemoList /> : <Navigate to={ROUTES.MEMOLIST} />
           }/>
         {/* 잘못된 경로는 HOME으로 */}
         <Route path="*" element={<Navigate to={ROUTES.HOME} />} />

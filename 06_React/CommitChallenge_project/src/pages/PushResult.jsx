@@ -21,7 +21,8 @@ import {
   Branch,
   EmptyState,
   EmptyIcon,
-  EmptyText
+  EmptyText,
+  MemoButton
 } from './PushResult.styled';
 
 const PushResult = () => {
@@ -49,7 +50,10 @@ const PushResult = () => {
 
   const handleDetail =(detailId) =>{
     navigate(ROUTES.DETAIL(detailId))
-  }
+  };
+   const handleMemoList = () => {
+    navigate(ROUTES.MEMOLIST);
+  };
   return (
     <Container>
       
@@ -67,6 +71,9 @@ const PushResult = () => {
           <RefreshButton onClick={handleRefresh} disabled={loading}>
             {loading ? '⏳ 확인 중...' : '🔄 새로고침'}
           </RefreshButton>
+          <MemoButton onClick={handleMemoList}>
+            📋 메모 목록
+          </MemoButton>
         </ActionBox>
 
         {status && <StatusMessage>{status}</StatusMessage>}

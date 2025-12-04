@@ -3,4 +3,5 @@ export const ROUTES = {
   LOGIN: '/login',
   SIGNUP: '/signup',
   DETAIL: (detailId) => `/detail/${detailId}`,
+  MEMOLIST: '/memos',
 };
