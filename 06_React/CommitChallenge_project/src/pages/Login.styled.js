@@ -7,6 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   background: #f5f5f5;
   padding: 20px;
+  width: 600px;
 `;
 
 export const FormBox = styled.div`
@@ -15,7 +16,7 @@ export const FormBox = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 40px;
   width: 100%;
-  max-width: 400px;
+  max-width: 800px;
 `;
 
 export const Title = styled.h1`

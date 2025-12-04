@@ -7,6 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   background: #f5f5f5;
   padding: 20px;
+  width: 600px;
 `;
 
 export const FormBox = styled.div`

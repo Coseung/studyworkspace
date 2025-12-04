@@ -26,9 +26,9 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
 
-  useEffect(() => {
-    console.log(localStorage.getItem('users'));
-  },);
+  // useEffect(() => {
+  //   console.log(localStorage.getItem('users'));
+  // },);
 
   const handleSubmit = () => {
     if (!userId.trim() || !password.trim()) {

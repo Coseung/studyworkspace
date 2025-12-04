@@ -26,12 +26,17 @@ export const UserProvider = ({children}) => {
     }
     return false;
   }
+   const logout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem('currentUser');
+  };
+
 
    const value = {
     currentUser,
     signup,
     login,
-    
+    logout,
   };
   
   return (
