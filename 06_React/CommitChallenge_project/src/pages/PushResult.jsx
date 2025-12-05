@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useGithub } from '../components/GithubContext.jsx';
 import { useAuth } from '../components/UserContext.jsx';
 import { ROUTES } from '../routes/routesPath.js';
+import { WiTime1,FaFolderOpen,FaCodeBranch,CiMemoPad, GiHighGrass } from "../components/icons/icons.js";
+
 import { 
   Container,
   Content,
@@ -69,10 +71,10 @@ const PushResult = () => {
         
         <ActionBox>
           <RefreshButton onClick={handleRefresh} disabled={loading}>
-            {loading ? '⏳ 확인 중...' : '🔄 새로고침'}
+            {loading ? '⏳ 확인 중...' : ' 새로고침'}
           </RefreshButton>
           <MemoButton onClick={handleMemoList}>
-            📋 메모 목록
+            메모 목록
           </MemoButton>
         </ActionBox>
 
@@ -82,13 +84,13 @@ const PushResult = () => {
             {pushHistory.map(push => (
               <Item key={push.id} onClick={()=> {handleDetail(push.id)}}>
                 <Time>
-                  🕒 {new Date(push.created_at).toLocaleTimeString('ko-KR')}
+                  <WiTime1/> {new Date(push.created_at).toLocaleTimeString('ko-KR')}
                 </Time>
                 <RepoName>
-                  📂 {push.repo.name}
+                  <FaFolderOpen/> {push.repo.name}
                 </RepoName>
                 <Branch>
-                  🔀 {push.payload.ref ? push.payload.ref.replace('refs/heads/', '') : 'main'}
+                  <FaCodeBranch/> {push.payload.ref ? push.payload.ref.replace('refs/heads/', '') : 'main'}
                 </Branch>
               </Item>
             ))}
@@ -96,7 +98,7 @@ const PushResult = () => {
         ) : (
           !loading && status && (
             <EmptyState>
-              <EmptyIcon>🌾</EmptyIcon>
+              <EmptyIcon><GiHighGrass/></EmptyIcon>
               <EmptyText>아직 커밋이 없습니다</EmptyText>
             </EmptyState>
           )

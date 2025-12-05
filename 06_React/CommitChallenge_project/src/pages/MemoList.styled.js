@@ -28,10 +28,7 @@ export const Title = styled.h1`
   font-weight: bold;
   color: #333;
   margin: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  
 `;
 
 export const BackButton = styled.button`

@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useGithub } from '../components/GithubContext.jsx';
 import { useMemo } from '../components/MemoContext.jsx';
 import { ROUTES } from '../routes/routesPath.js';
+import { WiTime1,FaFolderOpen,FaCodeBranch,CiMemoPad, GiHighGrass, FaPenToSquare } from "../components/icons/icons.js";
+
 import {
   Container,
   Content,
@@ -17,18 +19,7 @@ import {
   MemoForm,
   Textarea,
   AddButton,
-  MemoList,
-  MemoItem,
-  MemoHeader,
-  MemoDate,
-  MemoActions,
-  EditButton,
-  DeleteButton,
-  MemoText,
-  EditForm,
-  SaveButton,
-  CancelButton,
-  EmptyMemo,
+
 } from './PushDetail.styled';
 
 const PushDetail = () => {
@@ -40,9 +31,7 @@ const PushDetail = () => {
   const [pushData, setPushData] =useState(null);
   const [memoText, setMemoText] = useState('');
   const [memos, setMemos] = useState([]);
-  const [editingId, setEditingId] = useState(null);
-  const [editText, setEditText] = useState('');
-
+  
   useEffect(()=>{
     const push = pushHistory.find(p=>p.id === detailId);
     if (push){
@@ -63,6 +52,8 @@ const PushDetail = () => {
     addMemo(detailId,pushData,memoText);
     setMemoText('');
     setMemos(getMemosByPushId(detailId));
+    alert('메모가 저장되었습니다!');
+    navigate(ROUTES.MEMOLIST);
   }
 
   const handleBack = () => {
@@ -88,25 +79,25 @@ const PushDetail = () => {
       <Content>
         <Header>
           <BackButton onClick={handleBack}>← 뒤로가기</BackButton>
-          <Title>📝 푸시 상세 정보</Title>
+          <Title><BiSolidCommentDetail/> 푸시 상세 정보</Title>
           <InfoBox>
             <InfoItem>
-              <InfoLabel>🕒 시간:</InfoLabel>
+              <InfoLabel><WiTime1 /> 시간:</InfoLabel>
               {new Date(pushData.created_at).toLocaleString('ko-KR')}
             </InfoItem>
             <InfoItem>
-              <InfoLabel>📂 리포지토리:</InfoLabel>
+              <InfoLabel><FaFolderOpen/> 리포지토리:</InfoLabel>
               {pushData.repo.name}
             </InfoItem>
             <InfoItem>
-              <InfoLabel>🔀 브랜치:</InfoLabel>
+              <InfoLabel><FaCodeBranch/> 브랜치:</InfoLabel>
               {pushData.payload.ref ? pushData.payload.ref.replace('refs/heads/', '') : 'main'}
             </InfoItem>
           </InfoBox>
         </Header>
 
         <MemoSection>
-          <SectionTitle>✍️ 메모 작성</SectionTitle>
+          <SectionTitle><FaPenToSquare/> 메모 작성</SectionTitle>
           <MemoForm>
             <Textarea
               value={memoText}
