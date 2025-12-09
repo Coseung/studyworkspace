@@ -14,7 +14,7 @@ export const GithubProvider = ({children}) => {
     const targetUsername = username || gitUsername;
   
     console.log("아이디: ", targetUsername);
-    if(!targetUsername && targetUsername ===""){
+    if(!targetUsername || targetUsername ===""){
       alert("깃허브 아이디를 입력해주세요!");
       return;
     }

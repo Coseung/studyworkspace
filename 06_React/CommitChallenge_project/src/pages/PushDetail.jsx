@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useGithub } from '../components/GithubContext.jsx';
 import { useMemo } from '../components/MemoContext.jsx';
 import { ROUTES } from '../routes/routesPath.js';
-import { WiTime1,FaFolderOpen,FaCodeBranch,CiMemoPad, GiHighGrass, FaPenToSquare } from "../components/icons/icons.js";
+import { WiTime1,FaFolderOpen,FaCodeBranch,CiMemoPad, GiHighGrass, FaPenToSquare, BiSolidCommentDetail } from "../components/icons/icons.js";
 
 import {
   Container,
