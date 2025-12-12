@@ -7,10 +7,29 @@ export const UserProvider = ({children}) => {
     const user =localStorage.getItem('currentUser');
     return user ? JSON.parse(user) : null;
   });
-  const signup =(userData) =>{
-    const users = JSON.parse(localStorage.getItem('users')|| '[]');
-    users.push(userData);
-    localStorage.setItem('users',JSON.stringify(users));
+  const signup = async (userData) =>{
+    try{
+      const response = await fetch( "http://localhost:8888/member/signup",{
+        method : "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)
+      })
+      if(!response.ok){
+        const error = await response.text();
+        throw new Error(error || "회원가입 실패")
+      }
+
+      const result = await response.json();
+      console.log(result);
+      return result
+
+    }catch(e){
+      console.error("회원가입에러: ", e.massage);
+      return null;
+
+    }
   }
 
   const login = (userId, password) =>{
