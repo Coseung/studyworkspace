@@ -7,7 +7,7 @@ import lombok.*;
 @Table(name = "PROFILE")
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 public class Profile {
@@ -17,8 +17,9 @@ public class Profile {
     @Column(name = "PROFILE_ID")
     private Long profileId;
 
-    @Column(name = "USER_ID", unique = true, length = 30)
-    private String userId;
+    @OneToOne(mappedBy = "PROFILE")
+    @JoinColumn(name = "USER_ID", unique = true)
+    private Member userId;
 
     @Column(name = "PROFILE_IMAGE", length = 100)
     private String profileImage;

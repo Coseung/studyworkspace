@@ -7,7 +7,7 @@ import lombok.*;
 @Table(name = "TAG")
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 public class Tag {

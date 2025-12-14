@@ -5,19 +5,23 @@ import lombok.*;
 
 @Entity
 @Table(name = "BOARD_TAG")
-@IdClass(BoardTagId.class)
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 public class BoardTag {
 
     @Id
-    @Column(name = "BOARD_NO")
-    private Long boardNo;
+    @Column(name = "BOARD_TAG_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long boardTagId;
 
-    @Id
-    @Column(name = "TAG_ID")
-    private Long tagId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BOARD_NO", nullable = false)
+    private Board board;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TAG_ID", nullable = false)
+    private Tag tag;
 }

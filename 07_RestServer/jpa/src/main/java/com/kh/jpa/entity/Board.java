@@ -1,5 +1,6 @@
 package com.kh.jpa.entity;
 
+import com.kh.jpa.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -11,10 +12,10 @@ import java.time.LocalDateTime;
 @Table(name = "BOARD")
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class Board {
+public class Board  extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +25,9 @@ public class Board {
     @Column(name = "BOARD_TITLE", nullable = false, length = 100)
     private String boardTitle;
 
-    @Column(name = "BOARD_WRITER", nullable = false, length = 30)
-    private String boardWriter;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BOARD_WRITER", nullable = false)
+    private Member boardWriter;
 
     @Lob
     @Column(name = "BOARD_CONTENT", nullable = false)
@@ -42,12 +44,8 @@ public class Board {
     @Builder.Default
     private Integer count = 0;
 
-    @CreationTimestamp
-    @Column(name = "CREATE_DATE", updatable = false)
-    private LocalDateTime createDate;
 
     @Column(name = "STATUS", nullable = false, length = 1)
-    @ColumnDefault("'Y'")
-    @Builder.Default
-    private String status = "Y";
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }

@@ -1,5 +1,6 @@
 package com.kh.jpa.entity;
 
+import com.kh.jpa.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -12,10 +13,10 @@ import java.time.LocalDateTime;
 @Table(name = "MEMBER")
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class Member {
+public class Member extends BaseTimeEntity{
 
     @Id
     @Column(name = "USER_ID", length = 30)
@@ -27,11 +28,12 @@ public class Member {
     @Column(name = "USER_NAME", nullable = false, length = 15)
     private String userName;
 
-    @Column(name = "EMAIL", length = 254)
+    @Column(name = "EMAIL", length = 255)
     private String email;
 
     @Column(name = "GENDER", length = 1)
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Column(name = "AGE")
     private Integer age;
@@ -42,16 +44,16 @@ public class Member {
     @Column(name = "ADDRESS", length = 100)
     private String address;
 
-    @CreationTimestamp
-    @Column(name = "ENROLL_DATE", updatable = false)
-    private LocalDateTime enrollDate;
+    @Column(name="STATUS", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
-    @UpdateTimestamp
-    @Column(name = "MODIFY_DATE")
-    private LocalDateTime modifyDate;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "PROFILE")
+    private Profile profile;
 
-    @Column(name = "STATUS", nullable = false, length = 1)
-    @ColumnDefault("'Y'")
-    @Builder.Default
-    private String status = "Y";
+
+    public  enum Gender {
+        M,F
+    }
 }

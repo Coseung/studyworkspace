@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 @Table(name = "NOTICE")
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class Notice {
+public class Notice extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +23,12 @@ public class Notice {
     @Column(name = "NOTICE_TITLE", nullable = false, length = 30)
     private String noticeTitle;
 
-    @Column(name = "NOTICE_WRITER", nullable = false, length = 30)
-    private String noticeWriter;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "NOTICE_WRITER", nullable = false)
+    private Member noticeWriter;
 
     @Column(name = "NOTICE_CONTENT", nullable = false, length = 200)
     private String noticeContent;
 
-    @CreationTimestamp
-    @Column(name = "CREATE_DATE", updatable = false)
-    private LocalDateTime createDate;
+
 }
