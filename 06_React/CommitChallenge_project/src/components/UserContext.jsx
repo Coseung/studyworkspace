@@ -32,18 +32,36 @@ export const UserProvider = ({children}) => {
     }
   }
 
-  const login = (userId, password) =>{
-    const users = JSON.parse(localStorage.getItem('users')|| '[]')
-    const user = users.find(data => data.userId === userId && data.password ===password);
-    if(user){
-      //유저 비밀번호 빼고 저장 하기 로컬스토리지에
-      const {password, ...userWitoutPassword} =user;
-      setCurrentUser(userWitoutPassword);
-      localStorage.setItem('currentUser', JSON.stringify(userWitoutPassword));
-      return true;
+  const login = async (id,password) =>{
+    try{
+      const response = await fetch("http://localhost:8888/member/login",{
+        method : "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+                "userId": id,
+                "password": password
+            })
+        
+      })
+      if(!response.ok){
+        const error = await response.text();
+        throw new Error(error || "로그인 실패")
+      }
+      const userData = await response.json(); 
+      console.log("서버 응답 성공:", userData);
+
+      setCurrentUser(userData);
+      localStorage.setItem('currentUser', JSON.stringify(userData));
+      
+      return user;
+    }catch(e){
+      console.error("로그인에러: ", e.massage);
+      return null;
 
     }
-    return false;
+    
   }
    const logout = () => {
     setCurrentUser(null);

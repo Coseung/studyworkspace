@@ -7,13 +7,15 @@ import { MemoProvider } from './components/MemoContext.jsx'
 function App() {
   
   return (
-    <MemoProvider>
+  
       <UserProvider>
-        <GithubProvider>
-          <AppRoutes />
-        </GithubProvider>
+          <MemoProvider>
+          <GithubProvider>
+            <AppRoutes />
+          </GithubProvider>
+        </MemoProvider>
       </UserProvider>
-    </MemoProvider>
+    
   )
 }
 

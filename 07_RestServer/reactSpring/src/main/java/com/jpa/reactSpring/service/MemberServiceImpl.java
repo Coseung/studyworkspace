@@ -1,5 +1,6 @@
 package com.jpa.reactSpring.service;
 
+import com.jpa.reactSpring.dto.loginRequestDto;
 import com.jpa.reactSpring.entity.Member;
 import com.jpa.reactSpring.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,5 +16,13 @@ public class MemberServiceImpl implements MemberService {
         log.info("MemberServiceImpl::signup", member);
         Member savedMember = memberRepository.save(member);
         return savedMember;
+    }
+
+    @Override
+    public Member login(loginRequestDto member) {
+        log.info("MemberServiceImpl::signup", member);
+        Member loginMember = memberRepository.findByUserId(member.getUserId());
+        log.info("MemberServiceImpl::login", loginMember);
+        return loginMember;
     }
 }
