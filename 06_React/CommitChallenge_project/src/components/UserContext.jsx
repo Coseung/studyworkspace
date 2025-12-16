@@ -50,10 +50,10 @@ export const UserProvider = ({children}) => {
         throw new Error(error || "로그인 실패")
       }
       const userData = await response.json(); 
-      console.log("서버 응답 성공:", userData);
+      console.log("서버 응답 성공:", userData);
 
-      setCurrentUser(userData);
-      localStorage.setItem('currentUser', JSON.stringify(userData));
+      setCurrentUser(userData);
+      localStorage.setItem('currentUser', JSON.stringify(userData));
       
       return user;
     }catch(e){

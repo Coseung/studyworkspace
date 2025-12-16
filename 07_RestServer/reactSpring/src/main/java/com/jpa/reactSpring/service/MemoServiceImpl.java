@@ -15,7 +15,6 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true) // 조회 성능 최적화를 위해 기본은 읽기 전용으로
 public class MemoServiceImpl implements MemoService {
 
     private final MemoRepository memoRepository;
@@ -54,7 +53,7 @@ public class MemoServiceImpl implements MemoService {
                 .orElseThrow(() -> new IllegalArgumentException("메모가 없음"));
 
         if (!memo.getMember().getId().equals(memberId)) {
-            throw new IllegalArgumentException("니 메모 아니잖아");
+            throw new IllegalArgumentException("너 메모 아님");
         }
 
         memo.setMemo(memoText);
