@@ -1,51 +1,74 @@
 package com.kh.jpa.entity;
 
-import com.kh.jpa.enums.Status;
+import com.kh.jpa.enums.CommonEnums;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+@Builder @AllArgsConstructor
 @Entity
-@Table(name = "BOARD")
+@Table(name = "board")
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Builder
-public class Board  extends BaseTimeEntity{
+public class Board extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "BOARD_NO")
-    private Long boardNo;
+    private Long boardId;
 
-    @Column(name = "BOARD_TITLE", nullable = false, length = 100)
+    @Column(length = 100, nullable = false)
     private String boardTitle;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BOARD_WRITER", nullable = false)
-    private Member boardWriter;
-
+    //@Lob : 대용량 텍스트 데이터(CLOB) 매핑
+    @Column(nullable = false)
     @Lob
-    @Column(name = "BOARD_CONTENT", nullable = false)
     private String boardContent;
 
-    @Column(name = "ORIGIN_NAME", length = 100)
+    @Column(length = 100)
     private String originName;
 
-    @Column(name = "CHANGE_NAME", length = 100)
+    @Column(length = 100)
     private String changeName;
 
-    @Column(name = "COUNT")
-    @ColumnDefault("0")
+    //@Builder.Default : 빌드패턴으로 객체생서시 count값이 없다면 기본값을 사용한다.
     @Builder.Default
     private Integer count = 0;
 
-
-    @Column(name = "STATUS", nullable = false, length = 1)
+    @Column(length = 1, nullable = false)
     @Enumerated(EnumType.STRING)
-    private Status status;
+    @Builder.Default
+    private CommonEnums.Status status = CommonEnums.Status.Y;
+
+    //==== 연관관계 ====
+    //게시글 : 회원 N : 1 -> 연관관계 주인
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_writer", nullable = false)
+    private Member member;
+
+    @OneToMany(mappedBy = "board",orphanRemoval = true,cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<BoardTag> boardTags =  new ArrayList<>();
+
+    public void changeMember(Member member) {
+        this.member = member;
+
+        if(!member.getBoards().contains(this))
+            member.getBoards().add(this);
+    }
+
+    public void changeFile(String originName, String changeName) {
+        if(originName != null) this.originName = originName;
+        if(changeName != null) this.changeName = changeName;
+    }
+
+    public void addTag(Tag tag){
+        BoardTag boardTag = BoardTag.builder()
+                .tag(tag)
+                .build();
+
+        boardTag.changeBoard(this);
+        this.boardTags.add(boardTag);
+    }
 }

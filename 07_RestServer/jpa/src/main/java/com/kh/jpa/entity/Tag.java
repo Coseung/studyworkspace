@@ -3,20 +3,18 @@ package com.kh.jpa.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
-@Table(name = "TAG")
-@Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
+@Entity
+@Table(name = "tag")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TAG_ID")
     private Long tagId;
 
-    @Column(name = "TAG_NAME", nullable = false, unique = true, length = 30)
+    @Column(length = 30, nullable = false,unique = true)
     private String tagName;
 }

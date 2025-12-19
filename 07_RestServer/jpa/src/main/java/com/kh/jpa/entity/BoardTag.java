@@ -3,25 +3,30 @@ package com.kh.jpa.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
-@Table(name = "BOARD_TAG")
-@Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
+@Entity
+@Table(name = "board_tag")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BoardTag {
 
     @Id
-    @Column(name = "BOARD_TAG_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardTagId;
 
+    //==== 연관관계 ====
+    //게시글태그 : 게시글 (N : 1)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BOARD_NO", nullable = false)
+    @JoinColumn(name = "board_id", nullable = false)
     private Board board;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TAG_ID", nullable = false)
+    @JoinColumn(name = "tag_id", nullable = false)
     private Tag tag;
+
+    public void changeBoard(Board board) {
+        this.board = board;
+    }
+
 }

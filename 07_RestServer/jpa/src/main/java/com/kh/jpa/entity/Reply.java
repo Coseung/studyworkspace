@@ -1,40 +1,36 @@
 package com.kh.jpa.entity;
 
-import com.kh.jpa.enums.Status;
+import com.kh.jpa.enums.CommonEnums;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
-
+@Builder @AllArgsConstructor
 @Entity
 @Table(name = "REPLY")
-@Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Builder
-public class Reply extends BaseTimeEntity{
+@Getter @NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Reply extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "REPLY_NO")
     private Long replyNo;
 
-    @Column(name = "REPLY_CONTENT", nullable = false, length = 400)
+    @Column(length = 400, nullable = false)
     private String replyContent;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "REF_BNO", nullable = false)
-    private Board refBno;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "REPLY_WRITER", nullable = false)
-    private Member replyWriter;
-
-    @Column(name = "STATUS", nullable = false, length = 1)
+    @Column(length = 1, nullable = false)
     @Enumerated(EnumType.STRING)
-    private Status status;
+    @Builder.Default
+    private CommonEnums.Status status = CommonEnums.Status.Y;
+
+    // === 연관관계 맵핑 ====
+    // 댓글 : 게시글 (N : 1) - 연관관계 주인
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ref_bno", nullable = false)
+    private Board board;
+
+    // 댓글 : 댓글작성회원 (N : 1) - 연관관계 주인
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reply_writer", nullable = false)
+    private Member member;
+
 }
