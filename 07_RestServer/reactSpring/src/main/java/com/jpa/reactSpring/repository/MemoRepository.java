@@ -1,11 +1,17 @@
 package com.jpa.reactSpring.repository;
 
 import com.jpa.reactSpring.entity.Memo;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MemoRepository {
+    Memo save(Memo memo);
+
+    Optional<Memo> findById(Long id);
+
+    void delete(Memo memo);
+
     // 멤버 아이디로 메모 싹 다 긁어오기
     List<Memo> findAllByMemberId(Long memberId);
 

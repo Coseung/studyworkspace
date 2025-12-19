@@ -18,6 +18,8 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    // 유저 수정, 목록 등 기능 추가 예정
+    
     @PostMapping("/signup")
     public Member signup(@RequestBody Member member) {
 
