@@ -22,14 +22,14 @@ public class MemoServiceImpl implements MemoService {
 
     @Override
     public List<Memo> getMemos(Long memberId) {
-
+        log.info("getMemos : {}", memberId);
         return memoRepository.findAllByMemberId(memberId);
     }
 
     @Override
     @Transactional
     public Memo addMemo(MemoDto.MemoRequestDto dto) {
-        log.info("MemoServiceImpl::addMemo", dto);
+        log.info("MemoServiceImpl::addMemo {}", dto.getMemberId());
 
         Member member = memberRepository.findById(dto.getMemberId())
                 .orElseThrow(() -> new IllegalArgumentException("멤버가 없음요"));
@@ -64,8 +64,9 @@ public class MemoServiceImpl implements MemoService {
         memoRepository.delete(memo);
     }
 
-    @Override
-    public List<Memo> getMemosByPushId(String pushId, Long memberId) {
-        return memoRepository.findAllByPushIdAndMemberId(pushId, memberId);
-    }
+//    @Override
+//    public List<Memo> getMemosByPushId(String pushId, Long memberId) {
+//        log.info("getMemosByPushId {}", pushId);
+//        return memoRepository.findAllByPushIdAndMemberId(pushId, memberId);
+//    }
 }

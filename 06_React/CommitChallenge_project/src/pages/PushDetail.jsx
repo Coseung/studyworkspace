@@ -36,13 +36,13 @@ const PushDetail = () => {
     const push = pushHistory.find(p=>p.id === detailId);
     if (push){
       setPushData(push);
-      setMemos(getMemosByPushId(detailId));
+      // setMemos(getMemosByPushId(detailId));
     }
   },[detailId,pushHistory]);
 
 
   useEffect(() => {
-    setMemos(getMemosByPushId(detailId));
+    // setMemos(getMemosByPushId(detailId));
   }, [detailId]);
 
 
@@ -51,7 +51,7 @@ const PushDetail = () => {
 
     addMemo(detailId,pushData,memoText);
     setMemoText('');
-    setMemos(getMemosByPushId(detailId));
+    // setMemos(getMemosByPushId(detailId));
     alert('메모가 저장되었습니다!');
     navigate(ROUTES.MEMOLIST);
   }

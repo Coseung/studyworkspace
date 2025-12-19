@@ -1,7 +1,7 @@
 package com.jpa.reactSpring.service;
 
-import com.jpa.reactSpring.dto.MemberResponseDto;
-import com.jpa.reactSpring.dto.loginRequestDto;
+import com.jpa.reactSpring.dto.MemberDto;
+
 import com.jpa.reactSpring.entity.Member;
 import com.jpa.reactSpring.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +21,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberResponseDto login(loginRequestDto member) {
+    public MemberDto.MemberResponseDto login(MemberDto.loginRequestDto member) {
         Member loginMember = memberRepository.findByUserId(member.getUserId());
         log.info("login", loginMember);
 
         if (loginMember != null && loginMember.getPassword().equals(member.getPassword())) {
-            return MemberResponseDto.builder()
+            return MemberDto.MemberResponseDto.builder()
                     .id(loginMember.getId())
                     .userId(loginMember.getUserId())
                     .name(loginMember.getName())

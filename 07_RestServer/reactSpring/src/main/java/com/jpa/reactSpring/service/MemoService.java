@@ -10,5 +10,5 @@ public interface MemoService {
     Memo addMemo(MemoDto.MemoRequestDto dto);
     Memo updateMemo(Long id, String memoText, Long memberId);
     void deleteMemo(Long id, Long memberId);
-    List<Memo> getMemosByPushId(String pushId, Long memberId);
+//    List<Memo> getMemosByPushId(String pushId, Long memberId);
 }

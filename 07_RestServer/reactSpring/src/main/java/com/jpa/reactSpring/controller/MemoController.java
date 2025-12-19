@@ -48,9 +48,9 @@ public class MemoController {
     }
 
 
-    @GetMapping("/push/{pushId}")
-    public ResponseEntity<List<Memo>> getMemosByPushId(@PathVariable String pushId,
-                                                       @RequestParam Long memberId) {
-        return ResponseEntity.ok(memoService.getMemosByPushId(pushId, memberId));
-    }
+//    @GetMapping("/push/{pushId}")
+//    public ResponseEntity<List<Memo>> getMemosByPushId(@PathVariable String pushId,
+//                                                       @RequestParam Long memberId) {
+//        return ResponseEntity.ok(memoService.getMemosByPushId(pushId, memberId));
+//    }
 }

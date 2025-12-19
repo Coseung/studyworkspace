@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface MemoRepository extends JpaRepository<Memo, Long> {
+public interface MemoRepository {
     // 멤버 아이디로 메모 싹 다 긁어오기
     List<Memo> findAllByMemberId(Long memberId);
 

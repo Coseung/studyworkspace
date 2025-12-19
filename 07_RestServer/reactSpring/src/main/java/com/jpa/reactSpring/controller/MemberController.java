@@ -1,7 +1,6 @@
 package com.jpa.reactSpring.controller;
 
-import com.jpa.reactSpring.dto.MemberResponseDto;
-import com.jpa.reactSpring.dto.loginRequestDto;
+import com.jpa.reactSpring.dto.MemberDto;
 import com.jpa.reactSpring.entity.Member;
 import com.jpa.reactSpring.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +25,9 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<MemberResponseDto> login(@RequestBody loginRequestDto member) {
+    public ResponseEntity<MemberDto.MemberResponseDto> login(@RequestBody MemberDto.loginRequestDto member) {
         log.info("member : {}", member.getUserId());
-        MemberResponseDto responseDto = memberService.login(member);
+        MemberDto.MemberResponseDto responseDto = memberService.login(member);
 
         if (responseDto != null) {
             log.info("Login Success: {}", responseDto.getUserId());
