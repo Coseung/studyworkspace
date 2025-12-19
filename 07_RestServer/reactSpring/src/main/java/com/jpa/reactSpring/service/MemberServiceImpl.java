@@ -1,5 +1,6 @@
 package com.jpa.reactSpring.service;
 
+import com.jpa.reactSpring.dto.MemberResponseDto;
 import com.jpa.reactSpring.dto.loginRequestDto;
 import com.jpa.reactSpring.entity.Member;
 import com.jpa.reactSpring.repository.MemberRepository;
@@ -12,17 +13,26 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
+
     public Member signup(Member member) {
-        log.info("MemberServiceImpl::signup", member);
+        log.info("signup", member);
         Member savedMember = memberRepository.save(member);
         return savedMember;
     }
 
     @Override
-    public Member login(loginRequestDto member) {
-        log.info("MemberServiceImpl::signup", member);
+    public MemberResponseDto login(loginRequestDto member) {
         Member loginMember = memberRepository.findByUserId(member.getUserId());
-        log.info("MemberServiceImpl::login", loginMember);
-        return loginMember;
+        log.info("login", loginMember);
+
+        if (loginMember != null && loginMember.getPassword().equals(member.getPassword())) {
+            return MemberResponseDto.builder()
+                    .id(loginMember.getId())
+                    .userId(loginMember.getUserId())
+                    .name(loginMember.getName())
+                    .githubUsername(loginMember.getGithubUsername())
+                    .build();
+        }
+        return null;
     }
 }

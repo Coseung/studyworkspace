@@ -1,16 +1,17 @@
 package com.jpa.reactSpring.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
-@Getter @Setter
+@Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Memo {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String pushId;
@@ -25,15 +26,12 @@ public class Memo {
     @JoinColumn(name = "member_id")
     private Member member;
 
-
-    public static Memo createMemo(String pushId, String pushDate, String repoName, String branch, String memo, Member member) {
-        Memo m = new Memo();
-        m.pushId = pushId;
-        m.pushDate = pushDate;
-        m.repoName = repoName;
-        m.branch = branch;
-        m.memo = memo;
-        m.member = member;
-        return m;
+    public void changeMember(Member member) {
+        this.member = member;
     }
+
+    public void changeMemo(String memo) {
+        this.memo = memo;
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.jpa.reactSpring.controller;
 
-import com.jpa.reactSpring.dto.MemoRequestDto;
+import com.jpa.reactSpring.dto.MemoDto;
 import com.jpa.reactSpring.entity.Memo;
 import com.jpa.reactSpring.service.MemoService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class MemoController {
 
 
     @PostMapping
-    public ResponseEntity<Memo> addMemo(@RequestBody MemoRequestDto dto) {
+    public ResponseEntity<Memo> addMemo(@RequestBody MemoDto.MemoRequestDto dto ) {
         return ResponseEntity.ok(memoService.addMemo(dto));
     }
 

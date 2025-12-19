@@ -1,6 +1,6 @@
 package com.jpa.reactSpring.service;
 
-import com.jpa.reactSpring.dto.MemoRequestDto;
+import com.jpa.reactSpring.dto.MemoDto;
 import com.jpa.reactSpring.entity.Member;
 import com.jpa.reactSpring.entity.Memo;
 import com.jpa.reactSpring.repository.MemberRepository;
@@ -28,21 +28,14 @@ public class MemoServiceImpl implements MemoService {
 
     @Override
     @Transactional
-    public Memo addMemo(MemoRequestDto dto) {
+    public Memo addMemo(MemoDto.MemoRequestDto dto) {
         log.info("MemoServiceImpl::addMemo", dto);
 
         Member member = memberRepository.findById(dto.getMemberId())
                 .orElseThrow(() -> new IllegalArgumentException("멤버가 없음요"));
 
-        Memo memo = Memo.createMemo(
-                dto.getPushId(),
-                dto.getPushDate(),
-                dto.getRepoName(),
-                dto.getBranch(),
-                dto.getMemo(),
-                member
-        );
-
+        Memo memo = dto.toEntity();
+        memo.changeMember(member);
         return memoRepository.save(memo);
     }
 
@@ -56,7 +49,7 @@ public class MemoServiceImpl implements MemoService {
             throw new IllegalArgumentException("너 메모 아님");
         }
 
-        memo.setMemo(memoText);
+        memo.changeMemo(memoText);
         return memo;
     }
 
