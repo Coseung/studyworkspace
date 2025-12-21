@@ -59,6 +59,7 @@ export const MemoProvider = ({ children }) => {
     setLoading(true);
     setError(null);
 
+    console.log("푸시날짜 ", pushData.created_at)
     try {
       const requestData = {
         pushId: pushId,
@@ -84,7 +85,7 @@ export const MemoProvider = ({ children }) => {
       }
 
       const newMemo = await response.json();
-      setMemos(prev => [...prev, newMemo]);
+      setMemos(prev => [newMemo, ...prev ]);
       return newMemo;
     } catch (err) {
       console.error('메모 추가 에러:', err);

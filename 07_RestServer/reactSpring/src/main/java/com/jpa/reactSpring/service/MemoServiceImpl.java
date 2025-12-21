@@ -5,7 +5,6 @@ import com.jpa.reactSpring.entity.Member;
 import com.jpa.reactSpring.entity.Memo;
 import com.jpa.reactSpring.repository.MemberRepository;
 import com.jpa.reactSpring.repository.MemoRepository;
-import com.jpa.reactSpring.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,12 +20,37 @@ public class MemoServiceImpl implements MemoService {
 
     private final MemoRepository memoRepository;
     private final MemberRepository memberRepository;
-    private final TagRepository tagRepository;
 
     @Override
     public List<Memo> getMemos(Long memberId) {
         log.info("getMemos : {}", memberId);
         return memoRepository.findAllByMemberId(memberId);
+    }
+
+    @Override
+    public List<MemoDto.MemoTagListByMemberIdDto> getTags(Long memberId) {
+        log.info("getTags : {}", memberId);
+        List<String> repoNames = memoRepository.findDistinctRepoNamesByMemberId(memberId);
+
+        return repoNames.stream()
+                .map(repoName -> MemoDto.MemoTagListByMemberIdDto.of(repoName))
+                .toList();
+    }
+
+    @Override
+    public List<MemoDto.MemoResponseDto> getMemosByTag(Long memberId, String tag) {
+        log.info("getMemosByTag : {}, tag : {}", memberId, tag);
+        return memoRepository.findAllByMemberIdAndRepoName(memberId, tag)
+                .stream()
+                .map(memo -> MemoDto.MemoResponseDto.of(
+                        memo.getPushId(),
+                        memo.getPushDate(),
+                        memo.getRepoName(),
+                        memo.getBranch(),
+                        memo.getMemo(),
+                        memo.getMember().getId()
+                ))
+                .toList();
     }
 
     @Override
@@ -67,21 +91,11 @@ public class MemoServiceImpl implements MemoService {
         memoRepository.delete(memo);
     }
 
-    @Override
-    public List<MemoDto.MemoTagListByMemberIdDto> getTags(Long memberId) {
+    // deleted duplicate getTags
 
-
-        return tagRepository.findTagByMemberId(memberId)
-                .stream()
-                .map(tag -> MemoDto.MemoTagListByMemberIdDto.of(
-                        tag.getId(),
-                        tag.getName())
-                ).toList();
-    }
-
-//    @Override
-//    public List<Memo> getMemosByPushId(String pushId, Long memberId) {
-//        log.info("getMemosByPushId {}", pushId);
-//        return memoRepository.findAllByPushIdAndMemberId(pushId, memberId);
-//    }
+    // @Override
+    // public List<Memo> getMemosByPushId(String pushId, Long memberId) {
+    // log.info("getMemosByPushId {}", pushId);
+    // return memoRepository.findAllByPushIdAndMemberId(pushId, memberId);
+    // }
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMemo } from '../components/MemoContext.jsx';
 import { ROUTES } from '../routes/routesPath.js';
-import { WiTime1,FaFolderOpen,FaCodeBranch,CiMemoPad } from "../components/icons/icons.js";
+import { WiTime1, FaFolderOpen, FaCodeBranch, CiMemoPad } from "../components/icons/icons.js";
 
 import {
   Container,
@@ -51,7 +51,7 @@ const MemoList = () => {
 
   const handleEditSave = (id) => {
     if (!editText.trim()) return;
-    
+
     updateMemo(id, editText);
     setEditingId(null);
     setEditText('');
@@ -73,7 +73,7 @@ const MemoList = () => {
     <Container>
       <Content>
         <Header>
-          <Title><CiMemoPad/> 메모 목록</Title>
+          <Title><CiMemoPad /> 메모 목록</Title>
           <BackButton onClick={handleBack}>← 뒤로가기</BackButton>
         </Header>
 
@@ -102,16 +102,16 @@ const MemoList = () => {
                     <InfoIcon><WiTime1 /></InfoIcon>
                     <InfoLabel>커밋 시간:</InfoLabel>
                     <InfoValue>
-                      {new Date(memo.date).toLocaleString('ko-KR')}
+                      {new Date(memo.pushDate).toLocaleString('ko-KR')}
                     </InfoValue>
                   </InfoItem>
-                  
+
                   <InfoItem>
-                    <InfoIcon><FaFolderOpen/></InfoIcon>
+                    <InfoIcon><FaFolderOpen /></InfoIcon>
                     <InfoLabel>리포지토리:</InfoLabel>
                     <InfoValue>{memo.repoName}</InfoValue>
                   </InfoItem>
-                  
+
                   <InfoItem>
                     <InfoIcon><FaCodeBranch /></InfoIcon>
                     <InfoLabel>브랜치:</InfoLabel>

@@ -45,13 +45,34 @@ public class MemoDto {
     @NoArgsConstructor
     @Builder
     public static class MemoTagListByMemberIdDto{
-        private Long tagId;
         private String tagName;
 
-        public static MemoTagListByMemberIdDto of(Long tagId, String tagName) {
+        public static MemoTagListByMemberIdDto of(String tagName) {
             return MemoTagListByMemberIdDto.builder()
-                    .tagId(tagId)
                     .tagName(tagName)
+                    .build();
+        }
+    }
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class MemoResponseDto {
+        private String pushId;
+        private String pushDate;
+        private String repoName;
+        private String branch;
+        private String memo;
+        private Long memberId;
+
+        public static MemoResponseDto of(String pushId, String pushDate, String repoName, String branch, String memo, Long id) {
+            return MemoResponseDto.builder()
+                    .pushId(pushId)
+                    .pushDate(pushDate)
+                    .repoName(repoName)
+                    .branch(branch)
+                    .memo(memo)
+                    .memberId(id)
                     .build();
         }
     }

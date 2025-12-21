@@ -13,10 +13,13 @@ public interface MemoRepository {
 
     void delete(Memo memo);
 
-    // 멤버 아이디로 메모 싹 다 긁어오기
     List<Memo> findAllByMemberId(Long memberId);
 
-    // 푸시 아이디랑 멤버 아이디로 조회 (혹시 몰라서 멤버 아이디도 같이 조건 검사)
+
     List<Memo> findAllByPushIdAndMemberId(String pushId, Long memberId);
+
+    List<String> findDistinctRepoNamesByMemberId(Long memberId);
+
+    List<Memo> findAllByMemberIdAndRepoName(Long memberId, String repoName);
 
 }

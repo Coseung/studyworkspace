@@ -54,6 +54,11 @@ public class MemoController {
 
     }
 
+    @GetMapping("/member/{memberId}/tag")
+    public ResponseEntity<List<MemoDto.MemoResponseDto>> getTagMemo(@PathVariable Long memberId, @RequestParam String tag) {
+        return ResponseEntity.ok(memoService.getMemosByTag(memberId,tag));
+    }
+
 //    @GetMapping("/push/{pushId}")
 //    public ResponseEntity<List<Memo>> getMemosByPushId(@PathVariable String pushId,
 //                                                       @RequestParam Long memberId) {

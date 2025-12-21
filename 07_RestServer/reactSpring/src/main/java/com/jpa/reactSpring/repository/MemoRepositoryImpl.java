@@ -1,10 +1,8 @@
 package com.jpa.reactSpring.repository;
 
-import com.jpa.reactSpring.dto.MemoDto;
 import com.jpa.reactSpring.entity.Memo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -55,5 +53,22 @@ public class MemoRepositoryImpl implements MemoRepository {
                 .getResultList();
     }
 
+    @Override
+    public List<String> findDistinctRepoNamesByMemberId(Long memberId) {
+        return em.createQuery(
+                "SELECT DISTINCT m.repoName FROM Memo m WHERE m.member.id = :memberId AND m.repoName IS NOT NULL",
+                String.class)
+                .setParameter("memberId", memberId)
+                .getResultList();
+    }
 
+    @Override
+    public List<Memo> findAllByMemberIdAndRepoName(Long memberId, String repoName) {
+        return em.createQuery(
+                "select m from Memo m join fetch m.member where m.member.id = :memberId and m.repoName = :repoName",
+                Memo.class)
+                .setParameter("memberId", memberId)
+                .setParameter("repoName", repoName)
+                .getResultList();
+    }
 }
