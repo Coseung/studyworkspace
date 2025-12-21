@@ -1,8 +1,10 @@
 package com.jpa.reactSpring.repository;
 
+import com.jpa.reactSpring.dto.MemoDto;
 import com.jpa.reactSpring.entity.Memo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -52,4 +54,6 @@ public class MemoRepositoryImpl implements MemoRepository {
                 .setParameter("memberId", memberId)
                 .getResultList();
     }
+
+
 }

@@ -4,7 +4,7 @@ import com.jpa.reactSpring.dto.MemberDto;
 import com.jpa.reactSpring.entity.Member;
 
 public interface MemberService {
-     Member signup(Member member);
+     Long signup(Member member);
 
      MemberDto.MemberResponseDto login(MemberDto.loginRequestDto member);
 }

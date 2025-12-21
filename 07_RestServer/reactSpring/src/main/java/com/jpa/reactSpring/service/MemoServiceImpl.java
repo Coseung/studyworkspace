@@ -5,6 +5,7 @@ import com.jpa.reactSpring.entity.Member;
 import com.jpa.reactSpring.entity.Memo;
 import com.jpa.reactSpring.repository.MemberRepository;
 import com.jpa.reactSpring.repository.MemoRepository;
+import com.jpa.reactSpring.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,12 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MemoServiceImpl implements MemoService {
 
     private final MemoRepository memoRepository;
     private final MemberRepository memberRepository;
+    private final TagRepository tagRepository;
 
     @Override
     public List<Memo> getMemos(Long memberId) {
@@ -62,6 +65,18 @@ public class MemoServiceImpl implements MemoService {
             throw new IllegalArgumentException("니꺼만 지워라");
         }
         memoRepository.delete(memo);
+    }
+
+    @Override
+    public List<MemoDto.MemoTagListByMemberIdDto> getTags(Long memberId) {
+
+
+        return tagRepository.findTagByMemberId(memberId)
+                .stream()
+                .map(tag -> MemoDto.MemoTagListByMemberIdDto.of(
+                        tag.getId(),
+                        tag.getName())
+                ).toList();
     }
 
 //    @Override

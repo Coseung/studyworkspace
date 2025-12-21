@@ -15,10 +15,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     private EntityManager em;
 
     @Override
-    public Member save(Member member) {
-        em.persist(member);
-        return member;
-    }
+    public void save(Member member) {em.persist(member);}
 
     @Override
     public Optional<Member> findById(Long id) {
@@ -28,7 +25,8 @@ public class MemberRepositoryImpl implements MemberRepository {
 
     @Override
     public Member findByUserId(String userId) {
-        List<Member> result = em.createQuery("select m from Member m where m.userId = :userId", Member.class)
+        String jpql = "SELECT m FROM Member m WHERE m.userId = :userId";
+        List<Member> result = em.createQuery(jpql, Member.class)
                 .setParameter("userId", userId)
                 .getResultList();
 

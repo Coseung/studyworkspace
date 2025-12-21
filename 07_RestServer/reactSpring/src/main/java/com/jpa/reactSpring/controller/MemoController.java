@@ -47,6 +47,12 @@ public class MemoController {
         return ResponseEntity.ok("삭제 성공");
     }
 
+    @GetMapping("/{memberId}")
+    public ResponseEntity<List<MemoDto.MemoTagListByMemberIdDto>> getMemo(@PathVariable Long memberId) {
+        List<MemoDto.MemoTagListByMemberIdDto> list = memoService.getTags(memberId);
+        return ResponseEntity.ok(list);
+
+    }
 
 //    @GetMapping("/push/{pushId}")
 //    public ResponseEntity<List<Memo>> getMemosByPushId(@PathVariable String pushId,

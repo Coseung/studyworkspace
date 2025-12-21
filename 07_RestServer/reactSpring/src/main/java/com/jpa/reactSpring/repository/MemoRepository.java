@@ -1,5 +1,6 @@
 package com.jpa.reactSpring.repository;
 
+import com.jpa.reactSpring.dto.MemoDto;
 import com.jpa.reactSpring.entity.Memo;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface MemoRepository {
 
     // 푸시 아이디랑 멤버 아이디로 조회 (혹시 몰라서 멤버 아이디도 같이 조건 검사)
     List<Memo> findAllByPushIdAndMemberId(String pushId, Long memberId);
+
 }

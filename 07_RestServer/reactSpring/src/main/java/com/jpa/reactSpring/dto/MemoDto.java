@@ -40,6 +40,21 @@ public class MemoDto {
                     .build();
         }
     }
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class MemoTagListByMemberIdDto{
+        private Long tagId;
+        private String tagName;
+
+        public static MemoTagListByMemberIdDto of(Long tagId, String tagName) {
+            return MemoTagListByMemberIdDto.builder()
+                    .tagId(tagId)
+                    .tagName(tagName)
+                    .build();
+        }
+    }
 
 
 }
