@@ -23,6 +23,7 @@ public class MemberRepositoryImpl implements MemberRepository {
         return Optional.ofNullable(member);
     }
 
+    //jpql활요
     @Override
     public Member findByUserId(String userId) {
         String jpql = "SELECT m FROM Member m WHERE m.userId = :userId";
@@ -32,4 +33,5 @@ public class MemberRepositoryImpl implements MemberRepository {
 
         return result.stream().findFirst().orElse(null);
     }
+    
 }
