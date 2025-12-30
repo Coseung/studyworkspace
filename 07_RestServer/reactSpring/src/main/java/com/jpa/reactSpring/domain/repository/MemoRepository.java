@@ -1,7 +1,6 @@
-package com.jpa.reactSpring.repository;
+package com.jpa.reactSpring.domain.repository;
 
-import com.jpa.reactSpring.dto.MemoDto;
-import com.jpa.reactSpring.entity.Memo;
+import com.jpa.reactSpring.domain.entity.Memo;
 
 import java.util.List;
 import java.util.Optional;

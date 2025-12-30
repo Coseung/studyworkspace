@@ -1,9 +1,9 @@
-package com.jpa.reactSpring.service;
+package com.jpa.reactSpring.domain.service;
 
-import com.jpa.reactSpring.dto.MemberDto;
+import com.jpa.reactSpring.domain.dto.MemberDto;
 
-import com.jpa.reactSpring.entity.Member;
-import com.jpa.reactSpring.repository.MemberRepository;
+import com.jpa.reactSpring.domain.entity.Member;
+import com.jpa.reactSpring.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

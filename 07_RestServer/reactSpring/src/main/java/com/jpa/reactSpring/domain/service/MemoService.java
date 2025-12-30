@@ -1,8 +1,7 @@
-package com.jpa.reactSpring.service;
+package com.jpa.reactSpring.domain.service;
 
-import com.jpa.reactSpring.dto.MemoDto;
-import com.jpa.reactSpring.entity.Memo;
-import org.springframework.http.ResponseEntity;
+import com.jpa.reactSpring.domain.dto.MemoDto;
+import com.jpa.reactSpring.domain.entity.Memo;
 
 import java.util.List;
 

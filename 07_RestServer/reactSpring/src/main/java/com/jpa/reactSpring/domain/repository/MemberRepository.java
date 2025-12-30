@@ -1,7 +1,6 @@
-package com.jpa.reactSpring.repository;
+package com.jpa.reactSpring.domain.repository;
 
-import com.jpa.reactSpring.entity.Member;
-import org.springframework.stereotype.Repository;
+import com.jpa.reactSpring.domain.entity.Member;
 
 import java.util.Optional;
 

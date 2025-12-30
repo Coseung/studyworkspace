@@ -1,4 +1,4 @@
-package com.jpa.reactSpring.dto;
+package com.jpa.reactSpring.domain.dto;
 
 
 import lombok.*;

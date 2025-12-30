@@ -1,4 +1,4 @@
-package com.jpa.reactSpring.entity;
+package com.jpa.reactSpring.domain.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

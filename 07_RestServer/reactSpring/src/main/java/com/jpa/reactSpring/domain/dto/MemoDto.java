@@ -1,6 +1,6 @@
-package com.jpa.reactSpring.dto;
+package com.jpa.reactSpring.domain.dto;
 
-import com.jpa.reactSpring.entity.Memo;
+import com.jpa.reactSpring.domain.entity.Memo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

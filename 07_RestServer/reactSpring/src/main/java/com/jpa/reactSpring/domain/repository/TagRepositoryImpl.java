@@ -1,7 +1,6 @@
-package com.jpa.reactSpring.repository;
+package com.jpa.reactSpring.domain.repository;
 
-import com.jpa.reactSpring.dto.MemoDto;
-import com.jpa.reactSpring.entity.Tag;
+import com.jpa.reactSpring.domain.entity.Tag;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;

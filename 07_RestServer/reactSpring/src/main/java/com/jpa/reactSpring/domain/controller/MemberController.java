@@ -1,8 +1,8 @@
-package com.jpa.reactSpring.controller;
+package com.jpa.reactSpring.domain.controller;
 
-import com.jpa.reactSpring.dto.MemberDto;
-import com.jpa.reactSpring.entity.Member;
-import com.jpa.reactSpring.service.MemberService;
+import com.jpa.reactSpring.domain.dto.MemberDto;
+import com.jpa.reactSpring.domain.entity.Member;
+import com.jpa.reactSpring.domain.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -33,6 +33,7 @@ public class MemberController {
 
         if (responseDto != null) {
             log.info("Login Success: {}", responseDto.getUserId());
+
             return new ResponseEntity<>(responseDto, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

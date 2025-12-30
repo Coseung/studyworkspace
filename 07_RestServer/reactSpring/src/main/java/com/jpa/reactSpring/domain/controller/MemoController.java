@@ -1,8 +1,8 @@
-package com.jpa.reactSpring.controller;
+package com.jpa.reactSpring.domain.controller;
 
-import com.jpa.reactSpring.dto.MemoDto;
-import com.jpa.reactSpring.entity.Memo;
-import com.jpa.reactSpring.service.MemoService;
+import com.jpa.reactSpring.domain.dto.MemoDto;
+import com.jpa.reactSpring.domain.entity.Memo;
+import com.jpa.reactSpring.domain.service.MemoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

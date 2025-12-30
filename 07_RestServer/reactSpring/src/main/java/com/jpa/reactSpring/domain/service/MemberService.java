@@ -1,7 +1,7 @@
-package com.jpa.reactSpring.service;
+package com.jpa.reactSpring.domain.service;
 
-import com.jpa.reactSpring.dto.MemberDto;
-import com.jpa.reactSpring.entity.Member;
+import com.jpa.reactSpring.domain.dto.MemberDto;
+import com.jpa.reactSpring.domain.entity.Member;
 
 public interface MemberService {
      Long signup(Member member);

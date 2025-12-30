@@ -1,6 +1,6 @@
-package com.jpa.reactSpring.repository;
+package com.jpa.reactSpring.domain.repository;
 
-import com.jpa.reactSpring.entity.Member;
+import com.jpa.reactSpring.domain.entity.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
