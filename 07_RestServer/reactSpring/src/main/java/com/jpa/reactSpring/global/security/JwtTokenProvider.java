@@ -17,12 +17,15 @@ public class JwtTokenProvider {
     private final SecretKey secretKey;
     private final long expiration;
 
-    public JwtTokenProvider(@Value("${jwt.secret}") String secretKey,
-                            @Value("${jwt.expiration}") long expiration) {
-        this.secretKey = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+    // 생성자에서 secret과 expiration 주입
+    public JwtTokenProvider(
+            @Value("${jwt.secret}") String secret,
+            @Value("${jwt.expiration}") long expiration) {
+        this.secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
         this.expiration = expiration;
     }
 
+    // JWT 토큰 생성
     public String generateToken(String userId, String role) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiration);
@@ -35,10 +38,47 @@ public class JwtTokenProvider {
                 .expiration(expiryDate)
                 .signWith(secretKey)
                 .compact();
-
     }
 
-    public Optional<Claims> validateToken(String token) {
+    /**
+     * 토큰에서 사용자 ID 추출
+     */
+    public String getUserIdFromToken(String token) {
+        Claims claims = getClaims(token);
+        return claims.getSubject();
+    }
 
+    /**
+     * 토큰에서 권한 추출
+     */
+    public String getRoleFromToken(String token) {
+        Claims claims = getClaims(token);
+        return claims.get("role", String.class);
+    }
+
+    //토큰에서 Claims 추출
+    private Claims getClaims(String token) {
+        return Jwts.parser()
+                .verifyWith(secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getPayload();
+    }
+
+    /**
+     * 토큰 유효성 검증 및 Claims 반환
+     * 검증 성공 시 Claims를 포함한 Optional 반환, 실패 시 Optional.empty() 반환
+     */
+    public Optional<Claims> validateToken(String token) {
+        try {
+            Claims claims = Jwts.parser()
+                    .verifyWith(secretKey)
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
+            return Optional.of(claims);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }
