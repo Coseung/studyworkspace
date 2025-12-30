@@ -3,6 +3,7 @@ package com.kh.jpa.dto;
 import com.kh.jpa.entity.Board;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import org.springframework.web.multipart.MultipartFile;
 
