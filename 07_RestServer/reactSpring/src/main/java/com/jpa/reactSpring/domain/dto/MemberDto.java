@@ -14,6 +14,7 @@ public class MemberDto {
         private String userId;
         private String name;
         private String githubUsername;
+        private String token;
 
     }
 
@@ -22,7 +23,9 @@ public class MemberDto {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Builder
     public static class loginRequestDto {
+        @NotBlank(message = "아이디는 필수입니다")
         private String userId;
+        @NotBlank(message = "비밀번호는 필수입니다")
         private String password;
     }
 }

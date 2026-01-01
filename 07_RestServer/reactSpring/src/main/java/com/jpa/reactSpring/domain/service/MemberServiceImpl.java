@@ -27,6 +27,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberDto.MemberResponseDto login(MemberDto.loginRequestDto member) {
         Member loginMember = memberRepository.findByUserId(member.getUserId());
+
+
         log.info("login", loginMember);
 
         if (loginMember != null && loginMember.getPassword().equals(member.getPassword())) {
@@ -35,6 +37,7 @@ public class MemberServiceImpl implements MemberService {
                     .userId(loginMember.getUserId())
                     .name(loginMember.getName())
                     .githubUsername(loginMember.getGithubUsername())
+
                     .build();
         }
         return null;

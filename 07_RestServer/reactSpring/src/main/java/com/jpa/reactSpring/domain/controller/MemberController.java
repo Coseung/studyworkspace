@@ -27,7 +27,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<MemberDto.MemberResponseDto> login(@RequestBody MemberDto.loginRequestDto member) {
+    public ResponseEntity<MemberDto.MemberResponseDto> login(@Valid @RequestBody MemberDto.loginRequestDto member) {
         log.info("member : {}", member.getUserId());
         MemberDto.MemberResponseDto responseDto = memberService.login(member);
 
