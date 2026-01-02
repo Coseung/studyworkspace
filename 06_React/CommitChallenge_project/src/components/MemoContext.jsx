@@ -19,17 +19,21 @@ export const MemoProvider = ({ children }) => {
   // 메모 목록 가져오기
   const fetchMemos = async () => {
     if (!currentUser?.id) return;
-    
+
     setLoading(true);
     setError(null);
-    
+
     try {
-      const response = await fetch(`${API_BASE_URL}?memberId=${currentUser.id}`);
-      
+      const response = await fetch(`${API_BASE_URL}?memberId=${currentUser.id}`, {
+        headers: {
+          'Authorization': `Bearer ${currentUser.token}`
+        }
+      });
+
       if (!response.ok) {
         throw new Error('메모를 불러오는데 실패했습니다.');
       }
-      
+
       const data = await response.json();
       setMemos(data);
     } catch (err) {
@@ -65,8 +69,8 @@ export const MemoProvider = ({ children }) => {
         pushId: pushId,
         pushDate: pushData.created_at,
         repoName: pushData.repo.name,
-        branch: pushData.payload.ref 
-          ? pushData.payload.ref.replace('refs/heads/', '') 
+        branch: pushData.payload.ref
+          ? pushData.payload.ref.replace('refs/heads/', '')
           : 'main',
         memo: memoText,
         memberId: currentUser.id,
@@ -76,6 +80,7 @@ export const MemoProvider = ({ children }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${currentUser.token}`
         },
         body: JSON.stringify(requestData),
       });
@@ -85,7 +90,7 @@ export const MemoProvider = ({ children }) => {
       }
 
       const newMemo = await response.json();
-      setMemos(prev => [newMemo, ...prev ]);
+      setMemos(prev => [newMemo, ...prev]);
       return newMemo;
     } catch (err) {
       console.error('메모 추가 에러:', err);
@@ -111,6 +116,7 @@ export const MemoProvider = ({ children }) => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${currentUser?.token}`
         },
         body: JSON.stringify({ memo: newMemoText }),
       });
@@ -144,6 +150,9 @@ export const MemoProvider = ({ children }) => {
     try {
       const response = await fetch(`${API_BASE_URL}/${id}?memberId=${currentUser.id}`, {
         method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${currentUser.token}`
+        }
       });
 
       if (!response.ok) {
@@ -162,16 +171,21 @@ export const MemoProvider = ({ children }) => {
   // pushId로 메모 조회
   const getMemosByPushId = async (pushId) => {
     if (!currentUser?.id) return [];
-    
+
     try {
       const response = await fetch(
-        `${API_BASE_URL}/push/${pushId}?memberId=${currentUser.id}`
+        `${API_BASE_URL}/push/${pushId}?memberId=${currentUser.id}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${currentUser.token}`
+          }
+        }
       );
-      
+
       if (!response.ok) {
         throw new Error('메모를 불러오는데 실패했습니다.');
       }
-      
+
       const data = await response.json();
       return data;
     } catch (err) {

@@ -19,7 +19,7 @@ import {
 import { useEffect } from 'react';
 
 const LoginForm = () => {
-  const {login} = useAuth();
+  const { login } = useAuth();
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -30,22 +30,22 @@ const LoginForm = () => {
   //   console.log(localStorage.getItem('users'));
   // },);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!userId.trim() || !password.trim()) {
       setError('아이디와 비밀번호를 입력하세요');
       return;
     }
 
 
-    const success = login(userId, password);
-    
+    const success = await login(userId, password);
+
     if (success) {
       navigate(ROUTES.HOME);
     } else {
       setError('아이디 또는 비밀번호가 일치하지 않습니다');
     }
   };
-   const handleKeyDown = (e) => {
+  const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       handleSubmit();
     }
@@ -55,7 +55,7 @@ const LoginForm = () => {
     <Container>
       <FormBox>
         <Title>로그인</Title>
-        
+
         <FormGroup>
           <Label>아이디</Label>
           <Input

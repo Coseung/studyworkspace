@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         //인증없이 가능한 경우
                         .requestMatchers(HttpMethod.POST,"/member/login").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/api/members").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/member/signup").permitAll()
 
                         //관리자 전용
                         .requestMatchers(HttpMethod.GET, "/api/members").hasRole("ADMIN")
