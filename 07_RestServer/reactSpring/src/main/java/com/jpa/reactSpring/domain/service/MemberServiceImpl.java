@@ -30,6 +30,15 @@ public class MemberServiceImpl implements MemberService {
 
 
         log.info("login", loginMember);
+        if (loginMember == null) {
+            throw new IllegalArgumentException("존재하지 않는 사용자입니다.");
+        }
+
+
+        if (!loginMember.getPassword().equals(member.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
 
         if (loginMember != null && loginMember.getPassword().equals(member.getPassword())) {
             return MemberDto.MemberResponseDto.builder()
@@ -37,7 +46,7 @@ public class MemberServiceImpl implements MemberService {
                     .userId(loginMember.getUserId())
                     .name(loginMember.getName())
                     .githubUsername(loginMember.getGithubUsername())
-
+                    .token(token)
                     .build();
         }
         return null;

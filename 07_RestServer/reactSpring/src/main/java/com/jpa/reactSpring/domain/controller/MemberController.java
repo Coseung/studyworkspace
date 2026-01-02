@@ -3,6 +3,7 @@ package com.jpa.reactSpring.domain.controller;
 import com.jpa.reactSpring.domain.dto.MemberDto;
 import com.jpa.reactSpring.domain.entity.Member;
 import com.jpa.reactSpring.domain.service.MemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
