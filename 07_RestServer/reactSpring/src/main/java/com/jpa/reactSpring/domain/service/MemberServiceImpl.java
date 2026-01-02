@@ -4,6 +4,7 @@ import com.jpa.reactSpring.domain.dto.MemberDto;
 
 import com.jpa.reactSpring.domain.entity.Member;
 import com.jpa.reactSpring.domain.repository.MemberRepository;
+import com.jpa.reactSpring.global.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
-
+    private final JwtTokenProvider jwtTokenProvider;
     public Long signup(Member member) {
         log.info("signup", member);
         memberRepository.save(member);
@@ -38,12 +39,14 @@ public class MemberServiceImpl implements MemberService {
         if (!loginMember.getPassword().equals(member.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
-
+        Long Id = loginMember.getId();
+        String userId = loginMember.getUserId();
+        String token =jwtTokenProvider.generateToken(userId);
 
         if (loginMember != null && loginMember.getPassword().equals(member.getPassword())) {
             return MemberDto.MemberResponseDto.builder()
-                    .id(loginMember.getId())
-                    .userId(loginMember.getUserId())
+                    .id(Id)
+                    .userId(userId)
                     .name(loginMember.getName())
                     .githubUsername(loginMember.getGithubUsername())
                     .token(token)

@@ -1,6 +1,7 @@
 package com.jpa.reactSpring.domain.dto;
 
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 public class MemberDto {

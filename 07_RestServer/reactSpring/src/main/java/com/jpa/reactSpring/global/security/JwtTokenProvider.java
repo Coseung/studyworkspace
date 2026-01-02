@@ -26,14 +26,14 @@ public class JwtTokenProvider {
     }
 
     // JWT 토큰 생성
-    public String generateToken(String userId, String role) {
+    public String generateToken(String userId) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiration);
 
         //claim은 JWT 안에 들어가는 커스텀 데이터.
         return Jwts.builder()
                 .subject(userId)
-                .claim("role", role)
+                .claim("role", "USER")
                 .issuedAt(now)
                 .expiration(expiryDate)
                 .signWith(secretKey)
