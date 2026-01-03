@@ -102,6 +102,7 @@ export const MemoProvider = ({ children }) => {
   };
 
   // 메모 수정
+  //여기도
   const updateMemo = async (id, newMemoText) => {
     if (!currentUser?.id) {
       setError('로그인이 필요합니다.');
@@ -146,7 +147,8 @@ export const MemoProvider = ({ children }) => {
 
     setLoading(true);
     setError(null);
-
+    
+    //어소리제이션 인가 추가
     try {
       const response = await fetch(`${API_BASE_URL}/${id}?memberId=${currentUser.id}`, {
         method: 'DELETE',
@@ -169,6 +171,7 @@ export const MemoProvider = ({ children }) => {
   };
 
   // pushId로 메모 조회
+  //여기도
   const getMemosByPushId = async (pushId) => {
     if (!currentUser?.id) return [];
 
